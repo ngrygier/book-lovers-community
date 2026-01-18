@@ -21,14 +21,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 
 import java.net.PasswordAuthentication;
 */
-@Configuration
-public class BeansConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-}
 /*
 @Configuration
 @RequiredArgsConstructor

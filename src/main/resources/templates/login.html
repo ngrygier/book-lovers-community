@@ -1,10 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
 <body>
+<div class="container">
+    <h1>Login</h1>
+
+    <!-- Formularz logowania -->
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label>Username:</label>
+            <input type="text" name="username" placeholder="Enter username" required />
+        </div>
+
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Enter password" required />
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- Komunikat o błędzie logowania -->
+    <div th:if="${param.error}" style="color:red; margin-top:10px;">
+        Invalid username or password
+    </div>
+
+    <!-- Komunikat po wylogowaniu -->
+    <div th:if="${param.logout}" style="color:green; margin-top:10px;">
+        You have been logged out successfully
+    </div>
+
+    <div style="margin-top:10px;">
+        <a th:href="@{/register}">Don't have an account? Sign up</a>
+    </div>
+</div>
+
+<style>
+    /* Prosty styl podobny do register.css */
+    .container {
+        width: 350px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 2px 2px 12px #aaa;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    a {
+        text-decoration: none;
+        color: #4CAF50;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
 
 </body>
 </html>
