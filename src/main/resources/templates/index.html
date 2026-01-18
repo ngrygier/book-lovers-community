@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Lover Community</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <h2>Book Lover Community</h2>
+    <nav>
+        <a th:href="@{/login}">Sign in</a>
+        <a th:href="@{/register}">Sign up</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Welcome to the book lover community</h1>
+    <p>Discover popular books and build your own library!</p>
+    <a href="/register">
+        <button>Join us</button>
+    </a>
+
+</section>
+
+<section class="books">
+    <h2>Books recommended for you</h2>
+
+    <div class="book-grid">
+        <div class="book">
+            <img src="https://picsum.photos/200/300" alt="book">
+            <h4>Tytuł książki</h4>
+            <p>Autor</p>
+        </div>
+
+        <div class="book">
+            <img src="https://picsum.photos/200/301" alt="book">
+            <h4>Inna książka</h4>
+            <p>Autor</p>
+        </div>
+
+        <div class="book">
+            <img src="https://picsum.photos/200/302" alt="book">
+            <h4>Bestseller</h4>
+            <p>Autor</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

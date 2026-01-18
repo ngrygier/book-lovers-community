@@ -1,21 +1,22 @@
 spring:
-  #profiles:
-   # active: dev
-  servlet:
-    multipart:
-      max-file-size: 50MB
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:file:./data/testdb   # baza w pliku, zachowuje dane między restartami
     driver-class-name: org.h2.Driver
     username: sa
     password: dupa
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update    # update zachowa istniejące tabele i doda nowe
+    show-sql: true
 
-springdoc:
-  default-consumes-media-type: application/json
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
 
 server:
   servlet:
-    context-path: /api/v1/
+    context-path: /   # wszystkie endpointy pod /
+  port: 8081         # możesz zmienić port jeśli chcesz

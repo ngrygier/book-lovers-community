@@ -13,7 +13,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Optional<Book> findByTitle(String title);
     boolean existsByTitle(String title);
-    List<Book> findByAuthorContainingIgnoreCase(String author);
+    List<Book> findByAuthor_FullName(String fullName);
     List<Book> findByTitleContainingIgnoreCase(String title);
 
     List<Book> getBookById(Long id);

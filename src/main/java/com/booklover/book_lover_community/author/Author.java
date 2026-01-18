@@ -1,4 +1,4 @@
-package author;
+package com.booklover.book_lover_community.author;
 
 import com.booklover.book_lover_community.book.Book;
 import com.booklover.book_lover_community.userBook.UserBook;
@@ -19,13 +19,14 @@ import static jakarta.persistence.FetchType.LAZY;
 public class Author {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 100)
     private String fullName;
 
-    @OneToMany(fetch =LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Book> userBooks;
+    @OneToMany(fetch =LAZY, mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Book> books;
 
 }
 

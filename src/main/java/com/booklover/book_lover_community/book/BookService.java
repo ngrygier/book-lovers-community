@@ -44,4 +44,11 @@ public class BookService {
         }
         bookRepository.deleteById(id);
     }
+
+    @Transactional
+    public List<Book> searchByAuthor(String authorName) {
+        return bookRepository
+                .findByAuthor_FullName(authorName);
+    }
+
 }

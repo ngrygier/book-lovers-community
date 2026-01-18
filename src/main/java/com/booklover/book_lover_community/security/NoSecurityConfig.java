@@ -11,9 +11,12 @@ public class NoSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())      // tak działa w Security 6+
+                .csrf(csrf -> csrf.disable())
+                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+
         return http.build();
     }
+
 }
 

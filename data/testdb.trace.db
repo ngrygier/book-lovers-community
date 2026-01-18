@@ -1,0 +1,20 @@
+2026-01-18 08:56:32.088426+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "select ([*]*) from books"; oczekiwano "), INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "select ([*]*) from books"; expected "), INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+select (*) from books [42001-232]
+2026-01-18 09:34:25.525767+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "select * from [*]user"; oczekiwano "identifier"
+Syntax error in SQL statement "select * from [*]user"; expected "identifier"; SQL statement:
+select * from user [42001-232]
+2026-01-18 09:34:30.114367+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "USERS" nie istnieje
+Table "USERS" not found; SQL statement:
+select * from users [42102-232]
+2026-01-18 09:34:41.689261+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "SELECT * FROM [*]USER"; oczekiwano "identifier"
+Syntax error in SQL statement "SELECT * FROM [*]USER"; expected "identifier"; SQL statement:
+SELECT * FROM USER [42001-232]
+2026-01-18 09:34:54.499010+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "SELECT ([*]*) FROM USER"; oczekiwano "), INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "SELECT ([*]*) FROM USER"; expected "), INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+SELECT (*) FROM USER [42001-232]

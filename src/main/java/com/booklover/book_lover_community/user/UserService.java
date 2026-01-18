@@ -1,9 +1,14 @@
 package com.booklover.book_lover_community.user;
 
+import com.booklover.book_lover_community.Dto.RegisterRequestDto;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
@@ -20,25 +25,27 @@ public class UserService {
     }
 
     @Transactional
-    public User registerUser(User user) {
+    public User registerUser(RegisterRequestDto request) {
 
-        if (userRepository.existsByUsername(user.getUsername())) {
+        if (userRepository.existsByUsername(request.getUsername())) {
             throw new IllegalArgumentException("Username already taken");
         }
 
-        if (userRepository.existsByEmail(user.getEmail())) {
+        if (userRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("User already exists with given email");
         }
 
-        //hashowanie hasła
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User user = new User();
+        user.setFirstname(request.getFirstname());
+        user.setLastname(request.getLastname());
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword())); // hashujemy hasło
 
-        // wartości systemowe
-        user.setEnabled(true);
-        user.setAccountLocked(false);
 
         return userRepository.save(user);
     }
+
 
     @Transactional
     public User getUserById(Integer id) {
@@ -56,10 +63,11 @@ public class UserService {
 
         existingUser.setFirstname(updatedUser.getFirstname());
         existingUser.setLastname(updatedUser.getLastname());
-        existingUser.setDateOfBirth(updatedUser.getDateOfBirth());
         existingUser.setEmail(updatedUser.getEmail());
         existingUser.setUsername(updatedUser.getUsername());
 
         return userRepository.save(existingUser);
     }
+
+
 }

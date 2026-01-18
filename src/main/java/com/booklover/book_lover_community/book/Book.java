@@ -1,5 +1,6 @@
 package com.booklover.book_lover_community.book;
 
+import com.booklover.book_lover_community.author.Author;
 import com.booklover.book_lover_community.userBook.UserBook;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,9 +23,6 @@ public class Book {
     @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(nullable = false, length = 100)
-    private String author;
-
     @Column
     private String status; // "TO_READ", "READ", "READING"
 
@@ -36,4 +34,9 @@ public class Book {
 
     @OneToMany(fetch =LAZY, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserBook> userBooks;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
+    private Author author;
+
 }

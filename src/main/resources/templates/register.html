@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Sign up</title>
+  <link rel="stylesheet" th:href="@{/css/register.css}">
+</head>
+<body>
+<div class="container">
+  <h1>Sign up</h1>
+
+  <form th:action="@{/auth/register}" th:object="${registerRequest}" method="post">
+
+    <label>First Name:</label>
+    <input type="text" th:field="*{firstname}" required/>
+    <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="error"></div>
+
+    <label>Last Name:</label>
+    <input type="text" th:field="*{lastname}" required/>
+    <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="error"></div>
+
+    <label>Username:</label>
+    <input type="text" th:field="*{username}" required/>
+    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></div>
+
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required/>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
+
+    <label>Password:</label>
+    <input type="password" th:field="*{password}" required/>
+    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
+
+    <button type="submit">Sign up</button>
+  </form>
+
+  <div th:if="${errorMessage}" th:text="${errorMessage}" style="color:red;"></div>
+
+  <a th:href="@{/login}">Already have an account? Log in</a>
+</div>
+</body>
+</html>

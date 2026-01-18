@@ -1,7 +1,8 @@
-package com.booklover.book_lover_community.book;
+package com.booklover.book_lover_community.controller;
 
+import com.booklover.book_lover_community.book.Book;
+import com.booklover.book_lover_community.book.BookService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,10 +18,10 @@ public class BookController {
         this.service = service;
     }
 
-    /*@GetMapping
+    @GetMapping
     public List<Book> getBooks(){
-        return service.allBooks();
+        return service.getAllBooks();
     }
-*/
+
     //@PostMapping("/books");
 }
