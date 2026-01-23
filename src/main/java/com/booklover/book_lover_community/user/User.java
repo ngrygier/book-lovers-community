@@ -70,6 +70,15 @@ public class User implements UserDetails{
     @Column(nullable = false)
     private boolean enabled = true;
 
+    @Column(name = "profile_image")
+    private String profileImage;
+
+
+
+
+
+    //OVERRIDE
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList();

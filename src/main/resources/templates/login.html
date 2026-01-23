@@ -93,7 +93,16 @@
     a:hover {
         text-decoration: underline;
     }
+
 </style>
+
+
+<!-- informacja do usuniecie konta -->
+
+<div th:if="${param.deleted}" class="info-msg">
+    Your account has been successfully deleted.
+</div>
+
 
 </body>
 </html>

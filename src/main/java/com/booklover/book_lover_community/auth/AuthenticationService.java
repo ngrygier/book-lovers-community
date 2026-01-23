@@ -29,7 +29,7 @@ public class AuthenticationService {
         user.setLastname(dto.getLastname());
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
-        user.setPassword(passwordEncoder.encode(dto.getPassword())); // 🔐 hashowanie
+        user.setPassword(passwordEncoder.encode(dto.getPassword())); // hashowanie
 
         userRepository.save(user);
     }

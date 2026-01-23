@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile - BookLover</title>
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>BookLover</h1>
+        <nav>
+            <a th:href="@{/home}" class="nav-link">Home</a>
+        </nav>
+    </div>
+</header>
+
+<main class="profile-container">
+
+    <!-- PROFILE INFO -->
+    <section class="profile-info">
+
+        <!-- zdjęcie profilowe -->
+        <img th:src="@{'/uploads/profile-images/' + ${user.profileImage}}"
+             onerror="this.src='/images/default-avatar.png'"
+             alt="Profile picture"
+             class="profile-image">
+
+        <div class="profile-details">
+
+            <!-- username z backendu -->
+            <h2 class="username" th:text="${user.username}">username</h2>
+
+            <!-- FORMULARZ EDYCJI PROFILU -->
+            <form th:action="@{/profile/edit}"
+                  method="post"
+                  enctype="multipart/form-data"
+                  class="edit-profile-form">
+
+                <label for="username">Username</label>
+                <input type="text"
+                       id="username"
+                       th:field="${editProfile.username}"
+                       required>
+
+                <label for="profileImage">Profile image</label>
+                <input type="file"
+                       id="profileImage"
+                       name="profileImage"
+                       accept="image/*">
+
+                <button type="submit" class="edit-profile-btn">
+                    Save changes
+                </button>
+            </form>
+            <button class="delete-account-btn"
+                    onclick="if(confirm('Are you sure you want to delete your account?')) { window.location.href='/profile/delete'; }">
+                Delete Account
+            </button>
+
+
+        </div>
+    </section>
+
+    <!-- LIBRARIES HEADER -->
+    <section class="libraries-header">
+        <h3>My Libraries</h3>
+        <button class="add-library-btn">+ Add Library</button>
+    </section>
+
+    <!-- LIBRARY: TO READ -->
+    <section class="library-section">
+        <h4>📖 To Read</h4>
+        <div class="book-buttons">
+            <button class="book-btn">The Hobbit</button>
+            <button class="book-btn">Dune</button>
+        </div>
+    </section>
+
+    <!-- LIBRARY: READ -->
+    <section class="library-section">
+        <h4>✅ Read</h4>
+        <div class="book-buttons">
+            <button class="book-btn">1984</button>
+        </div>
+    </section>
+
+    <!-- LIBRARY: FAVORITES -->
+    <section class="library-section">
+        <h4>⭐ Favorites</h4>
+        <div class="book-buttons">
+            <button class="book-btn">The Little Prince</button>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

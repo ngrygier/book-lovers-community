@@ -15,7 +15,7 @@ spring:
       path: /h2-console
       settings:
         web-allow-others: true
-
+#michalinka pozdrawia <3
 server:
   servlet:
     context-path: /   # wszystkie endpointy pod /

@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>BookLover - Home</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 <body>
+<header>
+    <div class="container">
+        <h1>BookLover</h1>
+        <nav>
+            <a th:href="@{/profile}" class="profile-btn">Mój profil</a>
+        </nav>
+    </div>
+</header>
 
+<main>
+    <div class="search-container">
+        <form th:action="@{/home}" method="get">
+            <input type="text" name="query" placeholder="Szukaj książki..." />
+            <select name="type">
+                <option value="title">Tytuł</option>
+                <option value="author">Autor</option>
+            </select>
+            <button type="submit">Szukaj</button>
+        </form>
+    </div>
+
+    <div class="results-container">
+        <h2>Wyniki wyszukiwania:</h2>
+        <ul>
+            <!-- Przykładowy wynik -->
+            <li th:each="book : ${books}">
+                <span th:text="${book.title}">Tytuł książki</span> -
+                <span th:text="${book.author}">Autor</span>
+                <a th:href="@{'/books/' + ${book.id}}">Zobacz szczegóły</a>
+            </li>
+        </ul>
+    </div>
+</main>
 </body>
 </html>
