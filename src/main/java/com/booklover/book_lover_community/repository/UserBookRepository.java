@@ -1,5 +1,5 @@
-package com.booklover.book_lover_community.userBook;
-import com.booklover.book_lover_community.book.BookReview;
+package com.booklover.book_lover_community.repository;
+import com.booklover.book_lover_community.model.UserBook;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

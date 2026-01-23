@@ -1,10 +1,12 @@
-package com.booklover.book_lover_community.userBook;
+package com.booklover.book_lover_community.service;
 
-import com.booklover.book_lover_community.book.Book;
-import com.booklover.book_lover_community.book.BookRepository;
+import com.booklover.book_lover_community.model.Book;
+import com.booklover.book_lover_community.repository.BookRepository;
 import com.booklover.book_lover_community.user.ShelfStatus;
 import com.booklover.book_lover_community.user.User;
-import com.booklover.book_lover_community.user.UserRepository;
+import com.booklover.book_lover_community.repository.UserRepository;
+import com.booklover.book_lover_community.model.UserBook;
+import com.booklover.book_lover_community.repository.UserBookRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

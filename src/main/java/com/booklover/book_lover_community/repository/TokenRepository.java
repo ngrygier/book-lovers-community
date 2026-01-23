@@ -1,5 +1,6 @@
-package com.booklover.book_lover_community.user;
+package com.booklover.book_lover_community.repository;
 
+import com.booklover.book_lover_community.user.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

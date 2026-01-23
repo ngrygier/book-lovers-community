@@ -1,7 +1,7 @@
 package com.booklover.book_lover_community.controller;
 
 import com.booklover.book_lover_community.Dto.RegisterRequestDto;
-import com.booklover.book_lover_community.user.UserService;
+import com.booklover.book_lover_community.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

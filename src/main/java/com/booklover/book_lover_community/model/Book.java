@@ -1,7 +1,5 @@
-package com.booklover.book_lover_community.book;
+package com.booklover.book_lover_community.model;
 
-import com.booklover.book_lover_community.author.Author;
-import com.booklover.book_lover_community.userBook.UserBook;
 import jakarta.persistence.*;
 import lombok.*;
 

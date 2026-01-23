@@ -1,7 +1,8 @@
-package com.booklover.book_lover_community.book;
+package com.booklover.book_lover_community.repository;
 
 //  pobieranie książek z bazy danych
 
+import com.booklover.book_lover_community.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

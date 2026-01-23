@@ -1,6 +1,7 @@
-package com.booklover.book_lover_community.book;
+package com.booklover.book_lover_community.service;
 
-import jakarta.annotation.PostConstruct;
+import com.booklover.book_lover_community.model.Book;
+import com.booklover.book_lover_community.repository.BookRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;

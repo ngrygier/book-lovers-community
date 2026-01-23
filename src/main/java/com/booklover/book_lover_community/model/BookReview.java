@@ -1,4 +1,4 @@
-package com.booklover.book_lover_community.book;
+package com.booklover.book_lover_community.model;
 
 import com.booklover.book_lover_community.user.User;
 import jakarta.persistence.*;

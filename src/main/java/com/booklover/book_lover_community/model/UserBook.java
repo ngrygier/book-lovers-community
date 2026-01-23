@@ -1,6 +1,5 @@
-package com.booklover.book_lover_community.userBook;
+package com.booklover.book_lover_community.model;
 
-import com.booklover.book_lover_community.book.Book;
 import com.booklover.book_lover_community.user.ShelfStatus;
 import com.booklover.book_lover_community.user.User;
 import jakarta.persistence.*;

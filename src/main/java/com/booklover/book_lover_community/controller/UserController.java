@@ -1,8 +1,8 @@
 package com.booklover.book_lover_community.controller;
 
 import com.booklover.book_lover_community.user.User;
-import com.booklover.book_lover_community.user.UserRepository;
-import com.booklover.book_lover_community.user.UserService;
+import com.booklover.book_lover_community.repository.UserRepository;
+import com.booklover.book_lover_community.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

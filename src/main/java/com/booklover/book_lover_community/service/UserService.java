@@ -1,7 +1,10 @@
-package com.booklover.book_lover_community.user;
+package com.booklover.book_lover_community.service;
 
 import com.booklover.book_lover_community.Dto.EditProfileDto;
 import com.booklover.book_lover_community.Dto.RegisterRequestDto;
+import com.booklover.book_lover_community.model.Role;
+import com.booklover.book_lover_community.user.User;
+import com.booklover.book_lover_community.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,6 +59,7 @@ public class UserService implements UserDetailsService {
         user.setLastname(request.getLastname());
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
+        user.setRole(Role.USER);
 
         // Haszowanie hasła przed zapisem do bazy
         user.setPassword(passwordEncoder.encode(request.getPassword()));

@@ -1,7 +1,8 @@
 package com.booklover.book_lover_community.user;
 
-import com.booklover.book_lover_community.book.BookReview;
-import com.booklover.book_lover_community.userBook.UserBook;
+import com.booklover.book_lover_community.model.BookReview;
+import com.booklover.book_lover_community.model.Role;
+import com.booklover.book_lover_community.model.UserBook;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -28,6 +29,8 @@ import java.util.Set;
 @EntityListeners(AuditingEntityListener.class)
 public class User implements UserDetails{
 
+    //kolumny
+
     @Id
     @GeneratedValue
     private Integer id;
@@ -44,10 +47,14 @@ public class User implements UserDetails{
     @Column(nullable = false, length = 100)
     private String username;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+
+
     @Getter
     @Column(nullable = false, length = 100)
     private String password;
-
 
     @OneToMany(mappedBy = "user")
     private Set<UserBook> userBooks;

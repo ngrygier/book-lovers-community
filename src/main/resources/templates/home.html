@@ -6,11 +6,12 @@
     <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 <body>
+
 <header>
     <div class="container">
         <h1>BookLover</h1>
         <nav>
-            <a th:href="@{/profile}" class="profile-btn">Mój profil</a>
+            <a th:href="@{/profile}" class="profile-btn">My Profile</a>
         </nav>
     </div>
 </header>
@@ -18,26 +19,26 @@
 <main>
     <div class="search-container">
         <form th:action="@{/home}" method="get">
-            <input type="text" name="query" placeholder="Szukaj książki..." />
+            <input type="text" name="query" placeholder="Search for a book..." />
             <select name="type">
-                <option value="title">Tytuł</option>
-                <option value="author">Autor</option>
+                <option value="title">Title</option>
+                <option value="author">Author</option>
             </select>
-            <button type="submit">Szukaj</button>
+            <button type="submit">Search</button>
         </form>
     </div>
 
     <div class="results-container">
-        <h2>Wyniki wyszukiwania:</h2>
+        <h2>Search results:</h2>
         <ul>
-            <!-- Przykładowy wynik -->
             <li th:each="book : ${books}">
-                <span th:text="${book.title}">Tytuł książki</span> -
-                <span th:text="${book.author}">Autor</span>
-                <a th:href="@{'/books/' + ${book.id}}">Zobacz szczegóły</a>
+                <span th:text="${book.title}">Book title</span> -
+                <span th:text="${book.author}">Author</span>
+                <a th:href="@{'/books/' + ${book.id}}">View details</a>
             </li>
         </ul>
     </div>
 </main>
+
 </body>
 </html>

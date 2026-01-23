@@ -1,7 +1,7 @@
 /*
 package com.booklover.book_lover_community.security;
 
-import com.booklover.book_lover_community.user.UserRepository;
+import com.booklover.book_lover_community.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

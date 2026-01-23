@@ -1,8 +1,8 @@
-package com.booklover.book_lover_community.auth;
+package com.booklover.book_lover_community.service;
 
 import com.booklover.book_lover_community.Dto.RegisterRequestDto;
 import com.booklover.book_lover_community.user.User;
-import com.booklover.book_lover_community.user.UserRepository;
+import com.booklover.book_lover_community.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
