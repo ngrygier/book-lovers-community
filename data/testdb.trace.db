@@ -242,3 +242,11 @@ Wrong user name or password [28000-232]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:522)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 100 more
+2026-01-24 19:10:30.976700+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "[*]DESCRIBE review"; oczekiwano "DELETE, DROP"
+Syntax error in SQL statement "[*]DESCRIBE review"; expected "DELETE, DROP"; SQL statement:
+DESCRIBE review [42001-232]
+2026-01-24 19:10:39.047829+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "[*]DESCRIBE REVIEW"; oczekiwano "DELETE, DROP"
+Syntax error in SQL statement "[*]DESCRIBE REVIEW"; expected "DELETE, DROP"; SQL statement:
+DESCRIBE REVIEW [42001-232]

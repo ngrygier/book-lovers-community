@@ -17,29 +17,37 @@
 </header>
 
 <main>
+    <!-- FORMULARZ WYSZUKIWANIA -->
     <div class="search-container">
         <form th:action="@{/home}" method="get">
-            <input type="text" name="query" placeholder="Search for a book..." />
+            <input type="text" name="query" placeholder="Search for a book..."
+                   th:value="${query}" />
             <select name="type">
-                <option value="title">Title</option>
-                <option value="author">Author</option>
+                <option value="title" th:selected="${type == 'title'}">Title</option>
+                <option value="author" th:selected="${type == 'author'}">Author</option>
             </select>
             <button type="submit">Search</button>
         </form>
     </div>
 
     <div class="results-container">
-        <h2>Recommended books:</h2>
+        <h2 th:text="${query != null && query != '' ? 'Search results:' : 'Recommended books:'}"></h2>
+
         <div class="books-grid">
             <div class="book-card" th:each="book : ${books}">
-                <h3 th:text="${book.title}">Book title</h3>
-                <p class="author">by <span th:text="${book.author.fullName}">Author</span></p>
+                <!-- Tytuł książki z podświetleniem frazy wyszukiwania -->
+                <h3 th:utext="${query != null ? #strings.replace(book.title, query, '<mark>' + query + '</mark>') : book.title}">Book title</h3>
 
+                <!-- Autor z podświetleniem frazy -->
+                <p class="author" th:utext="${query != null ? 'by ' + #strings.replace(book.author.fullName, query, '<mark>' + query + '</mark>') : 'by ' + book.author.fullName}">Author</p>
+
+                <!-- Gwiazdki oceny -->
                 <div class="rating">
                     <span th:each="i : ${#numbers.sequence(1,5)}"
-                          th:classappend="${i <= T(java.lang.Math).round(book.rating)} ? 'star filled' : 'star'">
-                        ★
+                          th:classappend="${i <= T(java.lang.Math).floor(book.rating)} ? 'star filled' : 'star'" class="star">
+                        &#9733;
                     </span>
+                    <span th:if="${book.rating % 1 >= 0.5}" class="star half">&#9733;</span>
                     <span class="rating-number" th:text="${#numbers.formatDecimal(book.rating, 1, 1)} + ' / 5'">0.0 / 5</span>
                 </div>
                 <p class="rating-count" th:text="'(' + ${book.ratingCount} + ' ratings)'">(0 ratings)</p>

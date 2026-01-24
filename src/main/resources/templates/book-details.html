@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${book.title}">Book Details</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+
+<header>
+    <div class="container header-container">
+        <h1>BookLover</h1>
+        <nav>
+            <a th:href="@{/profile}" class="profile-btn">My Profile</a>
+            <a th:href="@{/home}" class="profile-btn">Home</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container book-details-container">
+        <h2 th:text="${book.title}">Book Title</h2>
+        <p class="author" th:text="'by ' + ${book.author.fullName}">Author</p>
+
+        <div class="rating">
+            <span th:each="i : ${#numbers.sequence(1,5)}"
+                  th:classappend="${i <= T(java.lang.Math).floor(book.rating)} ? 'star filled' : 'star'" class="star">
+                &#9733;
+            </span>
+            <span th:if="${book.rating % 1 >= 0.5}" class="star half">&#9733;</span>
+            <span class="rating-number" th:text="${#numbers.formatDecimal(book.rating,1,1)} + ' / 5'">0.0 / 5</span>
+        </div>
+        <p class="rating-count" th:text="'(' + ${book.ratingCount} + ' ratings)'">(0 ratings)</p>
+
+        <!-- FORMULARZ: Dodanie do biblioteki -->
+        <form th:action="@{'/books/' + ${book.id} + '/add-to-library'}" method="post">
+            <label for="library">Add to library:</label>
+            <select name="libraryId" id="library">
+                <option th:each="lib : ${libraries}" th:value="${lib.id}" th:text="${lib.name}">Library</option>
+            </select>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+
+    <!-- FORMULARZ OCENY I RECENZJI (tylko jeśli książka jest w bibliotece READ) -->
+    <div th:if="${readBooks.contains(book)}" class="review-form-container">
+        <h3>Add your review:</h3>
+        <form th:action="@{'/books/' + ${book.id} + '/add-review'}" method="post">
+
+            <label for="stars">Stars:</label>
+            <select name="stars" id="stars" required>
+                <option value="1">1 ★</option>
+                <option value="2">2 ★★</option>
+                <option value="3">3 ★★★</option>
+                <option value="4">4 ★★★★</option>
+                <option value="5">5 ★★★★★</option>
+            </select>
+            <br/>
+
+            <label for="reviewText">Review:</label><br/>
+            <textarea name="content" id="reviewText" rows="4" cols="50"
+                      placeholder="Write your review here..." required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+
+    <!-- WYŚWIETLANIE RECENZJI UŻYTKOWNIKÓW -->
+    <div class="reviews-container" th:if="${!reviews.isEmpty()}">
+        <h3>User Reviews:</h3>
+        <div th:each="review : ${reviews}" class="review-card">
+            <p class="review-stars">
+                <span th:each="i : ${#numbers.sequence(1, review.stars)}" class="star filled">&#9733;</span>
+                <span th:each="i : ${#numbers.sequence(review.stars+1,5)}" class="star">&#9733;</span>
+            </p>
+            <p class="review-content" th:text="${review.content}">Review text</p>
+            <p class="review-author" th:text="'by ' + ${review.user.username}">by username</p>
+        </div>
+    </div>
+
+    <!-- jeśli brak recenzji -->
+    <div th:if="${reviews.isEmpty()}">
+        <p>No reviews yet. Be the first to review!</p>
+    </div>
+
+</main>
+
+</body>
+</html>

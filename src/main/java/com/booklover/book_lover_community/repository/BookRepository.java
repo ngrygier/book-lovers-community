@@ -16,10 +16,12 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     Optional<Book> findByTitle(String title);
     boolean existsByTitle(String title);
     List<Book> findByAuthor_FullName(String fullName);
+    @Query("SELECT b FROM Book b WHERE LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%'))")
     List<Book> findByTitleContainingIgnoreCase(String title);
 
-    List<Book> getBookById(Long id);
-    // Losowe książki (np. 5)
+    @Query("SELECT b FROM Book b WHERE LOWER(b.author.fullName) LIKE LOWER(CONCAT('%', :author, '%'))")
+    List<Book> findByAuthorFullNameContainingIgnoreCase(String author);
+
     @Query("SELECT b FROM Book b")
     List<Book> findAllBooks();
 

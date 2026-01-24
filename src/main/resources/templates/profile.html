@@ -64,9 +64,11 @@
     <section class="library-section" th:each="library : ${defaultLibraries}">
         <h4 th:text="|📚 ${library.name}|">Library Name</h4>
         <div class="book-buttons">
-            <button th:each="book : ${library.books}"
-                    class="book-btn"
-                    th:text="${book.title}">Book Title</button>
+            <a th:each="book : ${library.books}"
+               th:href="@{'/books/' + ${book.id}}"
+               class="book-btn"
+               th:text="${book.title}">Book Title</a>
+
             <span th:if="${#lists.isEmpty(library.books)}">No books yet</span>
         </div>
     </section>
@@ -84,9 +86,11 @@
     <section class="library-section" th:each="library : ${customLibraries}">
         <h4 th:text="|📚 ${library.name}|">Library Name</h4>
         <div class="book-buttons">
-            <button th:each="book : ${library.books}"
-                    class="book-btn"
-                    th:text="${book.title}">Book Title</button>
+            <a th:each="book : ${library.books}"
+               th:href="@{'/books/' + ${book.id}}"
+               class="book-btn"
+               th:text="${book.title}">Book Title</a>
+
             <span th:if="${#lists.isEmpty(library.books)}">No books yet</span>
         </div>
     </section>

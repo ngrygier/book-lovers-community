@@ -3,6 +3,7 @@ package com.booklover.book_lover_community.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static jakarta.persistence.FetchType.LAZY;
@@ -38,7 +39,7 @@ public class Book {
     private Author author;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Review> reviews;
+    private Set<Review> reviews = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "library_id") // opcjonalnie, jeśli chcesz określić nazwę kolumny
