@@ -2,7 +2,10 @@ package com.booklover.book_lover_community.service;
 
 import com.booklover.book_lover_community.Dto.EditProfileDto;
 import com.booklover.book_lover_community.Dto.RegisterRequestDto;
+import com.booklover.book_lover_community.model.Library;
 import com.booklover.book_lover_community.model.Role;
+import com.booklover.book_lover_community.repository.LibraryRepository;
+import com.booklover.book_lover_community.user.ShelfStatus;
 import com.booklover.book_lover_community.user.User;
 import com.booklover.book_lover_community.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -29,11 +32,14 @@ public class UserService implements UserDetailsService {
     // Encoder do bezpiecznego haszowania haseł
     private final PasswordEncoder passwordEncoder;
 
+    private final LibraryRepository libraryRepository;
+
     // Konstruktor – Spring wstrzykuje zależności automatycznie
     public UserService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder) {
+                       PasswordEncoder passwordEncoder, LibraryRepository libraryRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.libraryRepository = libraryRepository;
     }
 
     // Rejestracja nowego użytkownika
@@ -139,4 +145,15 @@ public class UserService implements UserDetailsService {
                         new UsernameNotFoundException(
                                 "User with username '" + username + "' not found"));
     }
+
+    @Transactional
+    public void createDefaultShelves(User user) {
+        for (ShelfStatus status : ShelfStatus.values()) {
+            Library defaultLibrary = new Library();
+            defaultLibrary.setName(status.name()); // nazwa półki = status
+            defaultLibrary.setUser(user);
+            libraryRepository.save(defaultLibrary);
+        }
+    }
+
 }

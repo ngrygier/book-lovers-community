@@ -34,7 +34,9 @@ public class SecurityConfig {
                                 "/auth/register",
                                 "/css/**",
                                 "/js/**",
-                                "/h2-console/**"
+                                "/h2-console/**",
+                                "/admin",
+                                "/admin/authors/add"
                         ).permitAll()
 
                         // tylko ADMIN

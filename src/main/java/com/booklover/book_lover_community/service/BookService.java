@@ -1,5 +1,6 @@
 package com.booklover.book_lover_community.service;
 
+import com.booklover.book_lover_community.model.Author;
 import com.booklover.book_lover_community.model.Book;
 import com.booklover.book_lover_community.repository.BookRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,6 +17,8 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+
+    //utworzenie książki
     @Transactional
     public Book createBook(Book book) {
 
@@ -26,6 +29,8 @@ public class BookService {
         return bookRepository.save(book);
     }
 
+
+    //pozyskanie przez id
     @Transactional
     public Book getBookById(Long id) {
         return bookRepository.findById(id)
@@ -33,11 +38,14 @@ public class BookService {
                         new EntityNotFoundException("Book not found"));
     }
 
+
+    //zwraca wszystkie książki
     @Transactional
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
+    //usuwa książkę
     @Transactional
     public void deleteBook(Long id) {
         if (!bookRepository.existsById(id)) {
@@ -46,10 +54,27 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
+    //szuka po autorze
     @Transactional
-    public List<Book> searchByAuthor(String authorName) {
+    public List<Book> searchByAuthor(Author author) {
         return bookRepository
-                .findByAuthor_FullName(authorName);
+                .findByAuthor_FullName(author.getFullName());
     }
+
+    //dodaje książkę
+    public Book save(Book book){
+        return bookRepository.save(book);
+    }
+
+    //szukanie wszytskich
+    public List<Book> findAll() {
+        return bookRepository.findAll();
+    }
+
+    //usuwanie książki
+    public void deleteById(Long id) {
+        bookRepository.deleteById(id);
+    }
+
 
 }

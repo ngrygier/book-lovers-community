@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AuthorService {
+public class AuthorService  {
 
     private final AuthorRepository authorRepository;
 
@@ -20,5 +20,10 @@ public class AuthorService {
     public Author save(Author author) {
         return authorRepository.save(author);
     }
+
+    public void deleteById(Long id) {
+        authorRepository.deleteById(id);
+    }
+
 }
 
