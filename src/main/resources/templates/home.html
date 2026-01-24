@@ -8,7 +8,7 @@
 <body>
 
 <header>
-    <div class="container">
+    <div class="container header-container">
         <h1>BookLover</h1>
         <nav>
             <a th:href="@{/profile}" class="profile-btn">My Profile</a>
@@ -29,14 +29,24 @@
     </div>
 
     <div class="results-container">
-        <h2>Search results:</h2>
-        <ul>
-            <li th:each="book : ${books}">
-                <span th:text="${book.title}">Book title</span> -
-                <span th:text="${book.author}">Author</span>
-                <a th:href="@{'/books/' + ${book.id}}">View details</a>
-            </li>
-        </ul>
+        <h2>Recommended books:</h2>
+        <div class="books-grid">
+            <div class="book-card" th:each="book : ${books}">
+                <h3 th:text="${book.title}">Book title</h3>
+                <p class="author">by <span th:text="${book.author.fullName}">Author</span></p>
+
+                <div class="rating">
+                    <span th:each="i : ${#numbers.sequence(1,5)}"
+                          th:classappend="${i <= T(java.lang.Math).round(book.rating)} ? 'star filled' : 'star'">
+                        ★
+                    </span>
+                    <span class="rating-number" th:text="${#numbers.formatDecimal(book.rating, 1, 1)} + ' / 5'">0.0 / 5</span>
+                </div>
+                <p class="rating-count" th:text="'(' + ${book.ratingCount} + ' ratings)'">(0 ratings)</p>
+
+                <a th:href="@{'/books/' + ${book.id}}" class="details-btn">View details</a>
+            </div>
+        </div>
     </div>
 </main>
 

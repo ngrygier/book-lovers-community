@@ -40,4 +40,9 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Review> reviews;
 
+    @ManyToOne
+    @JoinColumn(name = "library_id") // opcjonalnie, jeśli chcesz określić nazwę kolumny
+    private Library library;
+
+
 }

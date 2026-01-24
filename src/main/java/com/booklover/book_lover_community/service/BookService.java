@@ -6,6 +6,8 @@ import com.booklover.book_lover_community.repository.BookRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -74,6 +76,21 @@ public class BookService {
     //usuwanie książki
     public void deleteById(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    @Transactional
+    public List<Book> getRandomBooks(int count) {
+        // Pobranie wszystkich książek
+        List<Book> allBooks = bookRepository.findAllBooks();
+
+        // Wymieszanie listy
+        Collections.shuffle(allBooks);
+
+        // Zwrócenie maksymalnie 'count' książek
+        if (count > allBooks.size()) {
+            count = allBooks.size();
+        }
+        return allBooks.subList(0, count);
     }
 
 
