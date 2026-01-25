@@ -3,6 +3,8 @@ package com.booklover.book_lover_community.repository;
 import com.booklover.book_lover_community.model.Library;
 import com.booklover.book_lover_community.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +27,13 @@ public interface LibraryRepository extends JpaRepository<Library, Long> {
 
 
     boolean existsByUserIdAndNameIgnoreCase(Integer id, String trim);
+
+    @Query("""
+    SELECT COUNT(l)
+    FROM Library l
+    JOIN l.books b
+    WHERE b.id = :bookId
+""")
+    Long countReaders(@Param("bookId") Long bookId);
+
 }

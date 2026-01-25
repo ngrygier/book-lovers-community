@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "review")
 @Getter
@@ -32,6 +34,17 @@ public class Review {
 
     @Column(name="content", nullable = false, length = 1000)
     private String content;
+
+    @Column(nullable = false)
+    private LocalDate readDate;
+
+    @PrePersist
+    public void setDefaultReadDate() {
+        if (this.readDate == null) {
+            this.readDate = LocalDate.now();
+        }
+    }
+
 
 
 }

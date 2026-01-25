@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableMethodSecurity // 👈 pozwala używać @PreAuthorize
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final CustomUserDetailsService userDetailsService;
@@ -21,8 +21,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // H2
-                .csrf(csrf -> csrf.disable())
+                // CSRF włączone globalnie, wyłączone tylko dla H2
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/h2-console/**")
+                )
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
 
                 // AUTORYZACJA

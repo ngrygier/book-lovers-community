@@ -103,6 +103,21 @@ public class UserService implements UserDetailsService {
         return defaultLibraries;
     }
 
+    //tworzenie custom libraries
+    @Transactional
+    public Library createCustomLibrary(String name, User user) {
+        if (libraryRepository.findByUserIdAndName(Long.valueOf(user.getId()), name) != null) {
+            throw new RuntimeException("Biblioteka o tej nazwie już istnieje dla użytkownika");
+        }
+
+        Library library = new Library();
+        library.setName(name);
+        library.setUser(user);
+
+        return libraryRepository.save(library);
+    }
+
+
     // -------------------- AKTUALNY UŻYTKOWNIK --------------------
     public User getCurrentUser() {
         var auth = SecurityContextHolder.getContext().getAuthentication();

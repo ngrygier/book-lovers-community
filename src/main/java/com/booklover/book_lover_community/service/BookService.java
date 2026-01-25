@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -133,6 +134,9 @@ public class BookService {
         bookRepository.save(book);
     }
 
+    public Optional<Book> findById(Long bookId) {
+        return bookRepository.findById(bookId);
+    }
 
 
 }

@@ -20,7 +20,6 @@
 
     <!-- ================= PROFILE INFO ================= -->
     <section class="profile-info">
-
         <img th:src="@{'/uploads/profile-images/' + ${user.profileImage}}"
              onerror="this.src='/images/default-avatar.png'"
              alt="Profile picture"
@@ -28,11 +27,17 @@
 
         <div class="profile-details">
             <h2 class="username" th:text="${user.username}">username</h2>
+            <p class="books-read">
+                📖 Przeczytane książki w <span th:text="${#dates.year(#dates.createNow())}">2026</span>:
+                <strong th:text="${user.booksReadThisYear}">0</strong>
+            </p>
 
+            <!-- Edycja profilu -->
             <form th:action="@{/profile/edit}"
                   method="post"
                   enctype="multipart/form-data"
                   class="edit-profile-form">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <label for="username">Username</label>
                 <input type="text"
@@ -46,9 +51,7 @@
                        name="profileImage"
                        accept="image/*">
 
-                <button type="submit" class="edit-profile-btn">
-                    Save changes
-                </button>
+                <button type="submit" class="edit-profile-btn">Save changes</button>
             </form>
 
             <button class="delete-account-btn"
@@ -65,21 +68,27 @@
         <h3>My Default Libraries</h3>
     </section>
 
-    <section class="library-section"
-             th:each="library : ${defaultLibraries}">
+    <section class="library-section" th:each="library : ${defaultLibraries}">
         <h4 th:text="|📚 ${library.name}|">Library Name</h4>
 
         <div class="book-buttons">
-            <a th:each="book : ${library.books}"
-               th:href="@{'/books/' + ${book.id}}"
-               class="book-btn"
-               th:text="${book.title}">
-                Book Title
-            </a>
+            <div th:each="book : ${library.books}" style="display:flex; align-items:center; margin-bottom:5px;">
+                <a th:href="@{'/books/' + ${book.id}}" class="book-btn" th:text="${book.title}">Book Title</a>
 
-            <span th:if="${#lists.isEmpty(library.books)}">
-                No books yet
-            </span>
+                <!-- PRZYCISK USUŃ -->
+                <form th:action="@{'/libraries/' + ${library.id} + '/remove-book/' + ${book.id}}"
+                      method="post"
+                      style="margin-left:10px;">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit" class="remove-book-btn"
+                            onclick="return confirm('Are you sure you want to remove this book from the library?');">
+                        Remove
+                    </button>
+                </form>
+            </div>
+
+            <span th:if="${#lists.isEmpty(library.books)}">No books yet</span>
         </div>
     </section>
 
@@ -87,42 +96,37 @@
     <section class="libraries-header">
         <h3>My Custom Libraries</h3>
 
-        <!-- komunikat błędu (np. duplikat) -->
-        <p th:if="${error}" class="error-message"
-           th:text="${error}"></p>
+        <!-- komunikat błędu -->
+        <p th:if="${error}" class="error-message" th:text="${error}"></p>
 
-        <form th:action="@{/profile/libraries/add}"
-              method="post"
-              class="add-library-form">
-
-            <input type="text"
-                   name="name"
-                   placeholder="Library name"
-                   required
-                   minlength="2"
-                   maxlength="30">
-
-            <button type="submit" class="add-library-btn">
-                + Add Library
-            </button>
+        <form th:action="@{/profile/libraries/add}" method="post" class="add-library-form">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <input type="text" name="name" placeholder="Library name" required minlength="2" maxlength="30">
+            <button type="submit" class="add-library-btn">+ Add Library</button>
         </form>
     </section>
 
-    <section class="library-section"
-             th:each="library : ${customLibraries}">
+    <section class="library-section" th:each="library : ${customLibraries}">
         <h4 th:text="|📚 ${library.name}|">Library Name</h4>
 
         <div class="book-buttons">
-            <a th:each="book : ${library.books}"
-               th:href="@{'/books/' + ${book.id}}"
-               class="book-btn"
-               th:text="${book.title}">
-                Book Title
-            </a>
+            <div th:each="book : ${library.books}" style="display:flex; align-items:center; margin-bottom:5px;">
+                <a th:href="@{'/books/' + ${book.id}}" class="book-btn" th:text="${book.title}">Book Title</a>
 
-            <span th:if="${#lists.isEmpty(library.books)}">
-                No books yet
-            </span>
+                <!-- PRZYCISK USUŃ -->
+                <form th:action="@{'/libraries/' + ${library.id} + '/remove-book/' + ${book.id}}"
+                      method="post"
+                      style="margin-left:10px;">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <!-- <button type="submit" class="remove-book-btn"
+                            onclick="return confirm('Are you sure you want to remove this book from the library?');">
+                        Remove
+                    </button> -->
+                </form>
+            </div>
+
+            <span th:if="${#lists.isEmpty(library.books)}">No books yet</span>
         </div>
     </section>
 

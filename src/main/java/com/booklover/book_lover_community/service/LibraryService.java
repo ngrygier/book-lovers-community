@@ -44,4 +44,49 @@ public class LibraryService {
                         "Library '" + libraryName + "' not found for user " + user.getUsername()));
     }
 
+    @Transactional
+    public void addBookToCustomLibrary(User currentUser, Long libraryId, Book book) {
+        Library library = libraryRepository.findById(libraryId)
+                .orElseThrow(() -> new RuntimeException("Biblioteka nie istnieje"));
+
+        // Sprawdzenie właściciela
+        if (!library.getUser().getId().equals(currentUser.getId())) {
+            throw new RuntimeException("Biblioteka nie należy do użytkownika");
+        }
+
+        // Dodanie książki do biblioteki
+        library.getBooks().add(book);
+        book.setLibrary(library); // jeśli w encji Book masz @ManyToOne do Library
+
+        libraryRepository.save(library); // zapis relacji
+    }
+
+    @Transactional
+    public void removeBookFromLibrary(User currentUser, Long libraryId, Long bookId) {
+        Library library = libraryRepository.findById(libraryId)
+                .orElseThrow(() -> new RuntimeException("Biblioteka nie istnieje"));
+
+        // Sprawdzenie właściciela
+        if (!library.getUser().getId().equals(currentUser.getId())) {
+            throw new RuntimeException("Biblioteka nie należy do użytkownika");
+        }
+
+        // Znalezienie książki w bibliotece
+        Book bookToRemove = library.getBooks().stream()
+                .filter(book -> book.getId().equals(bookId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Książka nie istnieje w tej bibliotece"));
+
+        // Usunięcie książki z listy
+        library.getBooks().remove(bookToRemove);
+
+        // Jeśli w encji Book masz @ManyToOne do Library, możesz ustawić null
+        bookToRemove.setLibrary(null);
+
+        // Zapisanie zmian
+        libraryRepository.save(library);
+    }
+
+
+
 }
