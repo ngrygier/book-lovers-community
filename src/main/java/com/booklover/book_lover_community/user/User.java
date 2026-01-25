@@ -1,8 +1,6 @@
 package com.booklover.book_lover_community.user;
 
-import com.booklover.book_lover_community.model.BookReview;
-import com.booklover.book_lover_community.model.Role;
-import com.booklover.book_lover_community.model.UserBook;
+import com.booklover.book_lover_community.model.*;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,10 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Getter
@@ -59,8 +54,8 @@ public class User implements UserDetails{
     @OneToMany(mappedBy = "user")
     private Set<UserBook> userBooks;
 
-    @OneToMany(mappedBy = "user")
-    private List<BookReview> reviews;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
 
     @CreatedDate
@@ -79,6 +74,10 @@ public class User implements UserDetails{
 
     @Column(name = "profile_image")
     private String profileImage;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Library> libraries = new ArrayList<>();
+
 
 
 

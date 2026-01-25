@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Users</h2>
+
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.email}"></td>
+        <td>
+            <a th:href="@{/admin/users/{id}(id=${user.id})}">Details</a>
+
+            <form th:if="${user.role != null and user.role != T(com.booklover.book_lover_community.model.Role).ADMIN}"
+                  th:action="@{/admin/users/delete/{id}(id=${user.id})}"
+                  method="post">
+                <button type="submit">Delete</button>
+            </form>
+
+            <span th:if="${user.role == T(com.booklover.book_lover_community.model.Role).ADMIN}">
+    🔒           ADMIN
+            </span>
+
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

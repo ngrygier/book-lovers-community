@@ -18,8 +18,9 @@
 
 <main class="profile-container">
 
-    <!-- PROFILE INFO -->
+    <!-- ================= PROFILE INFO ================= -->
     <section class="profile-info">
+
         <img th:src="@{'/uploads/profile-images/' + ${user.profileImage}}"
              onerror="this.src='/images/default-avatar.png'"
              alt="Profile picture"
@@ -45,53 +46,83 @@
                        name="profileImage"
                        accept="image/*">
 
-                <button type="submit" class="edit-profile-btn">Save changes</button>
+                <button type="submit" class="edit-profile-btn">
+                    Save changes
+                </button>
             </form>
 
             <button class="delete-account-btn"
-                    onclick="if(confirm('Are you sure you want to delete your account?')) { window.location.href='/profile/delete'; }">
+                    onclick="if(confirm('Are you sure you want to delete your account?')) {
+                        window.location.href='/profile/delete';
+                    }">
                 Delete Account
             </button>
         </div>
     </section>
 
-    <!-- DOMYŚLNE BIBLIOTEKI -->
+    <!-- ================= DEFAULT LIBRARIES ================= -->
     <section class="libraries-header">
         <h3>My Default Libraries</h3>
     </section>
 
-    <!-- iteracja po trzech domyślnych półkach -->
-    <section class="library-section" th:each="library : ${defaultLibraries}">
+    <section class="library-section"
+             th:each="library : ${defaultLibraries}">
         <h4 th:text="|📚 ${library.name}|">Library Name</h4>
+
         <div class="book-buttons">
             <a th:each="book : ${library.books}"
                th:href="@{'/books/' + ${book.id}}"
                class="book-btn"
-               th:text="${book.title}">Book Title</a>
+               th:text="${book.title}">
+                Book Title
+            </a>
 
-            <span th:if="${#lists.isEmpty(library.books)}">No books yet</span>
+            <span th:if="${#lists.isEmpty(library.books)}">
+                No books yet
+            </span>
         </div>
     </section>
 
-    <!-- DODATKOWE BIBLIOTEKI UŻYTKOWNIKA -->
+    <!-- ================= CUSTOM LIBRARIES ================= -->
     <section class="libraries-header">
         <h3>My Custom Libraries</h3>
-        <form th:action="@{/libraries/add}" method="post" class="add-library-form">
-            <input type="text" name="name" placeholder="Library name" required>
-            <button type="submit" class="add-library-btn">+ Add Library</button>
+
+        <!-- komunikat błędu (np. duplikat) -->
+        <p th:if="${error}" class="error-message"
+           th:text="${error}"></p>
+
+        <form th:action="@{/profile/libraries/add}"
+              method="post"
+              class="add-library-form">
+
+            <input type="text"
+                   name="name"
+                   placeholder="Library name"
+                   required
+                   minlength="2"
+                   maxlength="30">
+
+            <button type="submit" class="add-library-btn">
+                + Add Library
+            </button>
         </form>
     </section>
 
-    <!-- iteracja po dodatkowych bibliotekach użytkownika -->
-    <section class="library-section" th:each="library : ${customLibraries}">
+    <section class="library-section"
+             th:each="library : ${customLibraries}">
         <h4 th:text="|📚 ${library.name}|">Library Name</h4>
+
         <div class="book-buttons">
             <a th:each="book : ${library.books}"
                th:href="@{'/books/' + ${book.id}}"
                class="book-btn"
-               th:text="${book.title}">Book Title</a>
+               th:text="${book.title}">
+                Book Title
+            </a>
 
-            <span th:if="${#lists.isEmpty(library.books)}">No books yet</span>
+            <span th:if="${#lists.isEmpty(library.books)}">
+                No books yet
+            </span>
         </div>
     </section>
 

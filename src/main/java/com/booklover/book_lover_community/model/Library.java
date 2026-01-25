@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -23,6 +25,11 @@ public class Library {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "library")
-    private List<Book> books = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "library_books",
+            joinColumns = @JoinColumn(name = "library_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private Set<Book> books = new HashSet<>();
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>User details</h2>
+
+<p><b>Username:</b> <span th:text="${user.username}"></span></p>
+<p><b>Email:</b> <span th:text="${user.email}"></span></p>
+
+<h3>User reviews</h3>
+
+<table>
+  <tr>
+    <th>Book</th>
+    <th>Content</th>
+    <th>Rating</th>
+    <th>Action</th>
+  </tr>
+
+  <tr th:each="review : ${reviews}">
+    <td th:text="${review.book.title}"></td>
+    <td th:text="${review.content}"></td>
+    <td th:text="${review.stars}"></td>
+    <td>
+      <form th:action="@{/admin/reviews/delete/{id}(id=${review.id})}"
+            method="post">
+        <input type="hidden" name="userId" th:value="${user.id}" />
+        <button type="submit">Delete</button>
+      </form>
+
+    </td>
+  </tr>
+</table>
+
+<a th:href="@{/admin/users}">⬅ Back to users</a>
+
+</body>
+</html>

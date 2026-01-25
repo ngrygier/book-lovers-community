@@ -57,4 +57,32 @@ public class ProfileController {
         userService.updateProfile(dto);
         return "redirect:/profile";
     }
+
+    @PostMapping("/profile/libraries/add")
+    public String addLibrary(@ModelAttribute("name") String name) {
+
+        User user = userService.getCurrentUser();
+
+        // zabezpieczenie: pusta nazwa
+        if (name == null || name.trim().isEmpty()) {
+            return "redirect:/profile";
+        }
+
+        // zabezpieczenie: brak duplikatów (case-insensitive)
+        boolean exists = libraryRepository
+                .existsByUserIdAndNameIgnoreCase(user.getId(), name.trim());
+
+        if (exists) {
+            return "redirect:/profile";
+        }
+
+        Library library = new Library();
+        library.setName(name.trim());
+        library.setUser(user);
+
+        libraryRepository.save(library);
+
+        return "redirect:/profile";
+    }
+
 }
