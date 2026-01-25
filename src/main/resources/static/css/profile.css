@@ -10,6 +10,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f4f8;
     color: #333;
+    line-height: 1.6;
 }
 
 /* ===== HEADER ===== */
@@ -21,6 +22,7 @@ header {
 
 header .container {
     width: 90%;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -35,13 +37,21 @@ header h1 {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    margin-left: 20px;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
 }
 
 /* ===== MAIN ===== */
 .profile-container {
     width: 90%;
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 /* ===== PROFILE INFO ===== */
@@ -49,16 +59,15 @@ header h1 {
     display: flex;
     align-items: flex-start;
     gap: 30px;
-    margin-bottom: 40px;
+    padding: 25px;
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
 }
 
 .profile-image {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #4a90e2;
@@ -71,10 +80,14 @@ header h1 {
     flex: 1;
 }
 
-/* username */
 .username {
     font-size: 1.8em;
     font-weight: bold;
+}
+
+.books-read {
+    font-size: 1em;
+    color: #555;
 }
 
 /* ===== FORMULARZ EDYCJI PROFILU ===== */
@@ -92,9 +105,9 @@ header h1 {
 
 .edit-profile-form input[type="text"],
 .edit-profile-form input[type="file"] {
-    padding: 8px 10px;
+    padding: 10px 12px;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 1em;
     width: 100%;
 }
@@ -104,15 +117,32 @@ header h1 {
     background-color: #4a90e2;
     color: white;
     border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
+    padding: 10px 20px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .edit-profile-btn:hover {
     background-color: #357ABD;
+}
+
+/* ===== DELETE ACCOUNT BUTTON ===== */
+.delete-account-btn {
+    width: fit-content;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.delete-account-btn:hover {
+    background-color: #c0392b;
 }
 
 /* ===== LIBRARIES HEADER ===== */
@@ -120,32 +150,46 @@ header h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+}
+
+.add-library-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.add-library-form input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    flex: 1;
 }
 
 .add-library-btn {
-    background-color: #ffffff;
-    color: #4a90e2;
-    border: 2px solid #4a90e2;
-    padding: 8px 14px;
-    border-radius: 6px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
     transition: all 0.2s ease;
 }
 
 .add-library-btn:hover {
-    background-color: #4a90e2;
-    color: white;
+    background-color: #357ABD;
 }
 
 /* ===== LIBRARY SECTION ===== */
 .library-section {
     background-color: white;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
     margin-bottom: 25px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
 }
 
 .library-section h4 {
@@ -164,17 +208,86 @@ header h1 {
     background-color: #e6f0ff;
     color: #333;
     border: none;
-    padding: 8px 14px;
-    border-radius: 20px;
+    padding: 8px 16px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    font-size: 0.95em;
+    transition: all 0.2s ease;
+    text-decoration: none;
 }
+/* ===== IMPORT / EXPORT BUTTONS ===== */
+form button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+/* Ukrycie domyślnego inputa */
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+/* Styl własnego przycisku */
+.custom-file-upload {
+    display: inline-block;
+    background-color: #4a90e2;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    margin-right: 10px;
+}
+
+.custom-file-upload:hover {
+    background-color: #357ABD;
+}
+
+
+form button:hover {
+    background-color: #357ABD;
+}
+
+/* ===== IMPORT FILE INPUT ===== */
+form input[type="file"] {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
 
 .book-btn:hover {
     background-color: #4a90e2;
     color: white;
     transform: scale(1.05);
+}
+
+/* ===== REMOVE BOOK BUTTON ===== */
+.remove-book-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s ease;
+}
+
+.remove-book-btn:hover {
+    background-color: #c0392b;
+}
+
+/* ===== ERROR MESSAGE ===== */
+.error-message {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 /* ===== RESPONSYWNOŚĆ ===== */
@@ -194,19 +307,10 @@ header h1 {
     .edit-profile-form input[type="file"] {
         width: 100%;
     }
-}
 
-.delete-account-btn {
-    width: fit-content;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.delete-account-btn:hover {
-    background-color: #c0392b;
+    .add-library-form {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
 }
