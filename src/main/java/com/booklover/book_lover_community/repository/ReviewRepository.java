@@ -1,6 +1,7 @@
 package com.booklover.book_lover_community.repository;
 
 import com.booklover.book_lover_community.model.Review;
+import com.booklover.book_lover_community.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,5 +24,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
         GROUP BY r.stars
     """)
     List<Object[]> getRatingDistribution(@Param("bookId") Long bookId);
+
+    List<Review> findAllByUser(User user);
 }
 

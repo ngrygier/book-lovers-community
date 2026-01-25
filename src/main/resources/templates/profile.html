@@ -62,6 +62,16 @@
             </button>
         </div>
     </section>
+    <!-- ================= IMPORTING AND EXPORTING ================= -->
+    <form th:action="@{/user/data/export/json/{userId}(userId=${user.id})}" method="get">
+        <button type="submit">Eksportuj JSON</button>
+    </form>
+
+    <form th:action="@{/user/data/import/json/{userId}(userId=${user.id})}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".json">
+        <button type="submit">Importuj JSON</button>
+    </form>
+
 
     <!-- ================= DEFAULT LIBRARIES ================= -->
     <section class="libraries-header">

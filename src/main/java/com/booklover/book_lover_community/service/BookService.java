@@ -4,7 +4,9 @@ import com.booklover.book_lover_community.Dto.ReviewDto;
 import com.booklover.book_lover_community.model.Author;
 import com.booklover.book_lover_community.model.Book;
 import com.booklover.book_lover_community.model.Review;
+import com.booklover.book_lover_community.model.UserBook;
 import com.booklover.book_lover_community.repository.BookRepository;
+import com.booklover.book_lover_community.repository.UserBookRepository;
 import com.booklover.book_lover_community.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -14,14 +16,18 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final UserBookRepository userBookRepository;
 
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, UserBookService userBookService, UserBookRepository userBookRepository) {
         this.bookRepository = bookRepository;
+        this.userBookRepository = userBookRepository;
+
     }
 
     // ========================
@@ -136,6 +142,13 @@ public class BookService {
 
     public Optional<Book> findById(Long bookId) {
         return bookRepository.findById(bookId);
+    }
+
+    public List<Book> getBooksByUser(User user) {
+        return userBookRepository.findAllByUser(user)
+                .stream()
+                .map(UserBook::getBook)
+                .collect(Collectors.toList());
     }
 
 

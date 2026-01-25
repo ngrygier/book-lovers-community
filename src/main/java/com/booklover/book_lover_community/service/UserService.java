@@ -157,4 +157,12 @@ public class UserService implements UserDetailsService {
                         new UsernameNotFoundException("User with username '" + username + "' not found"));
     }
 
+    public User getUserById(Long id) {
+        return userRepository.findById(Math.toIntExact(id))
+                .orElseThrow(() -> new RuntimeException("Użytkownik nie znaleziony: " + id));
+    }
+
 }
+
+
+
