@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserBookRepository extends JpaRepository<UserBook, Long> {
-    List<UserBook> findByBookId(Long bookId);
-    Optional<UserBook> findByUserIdAndBookId(Integer userId, Long bookId);
+public interface UserBookRepository extends JpaRepository<UserBook, Long> { ;
     List<UserBook> findAllByUser(User user);
 
 }

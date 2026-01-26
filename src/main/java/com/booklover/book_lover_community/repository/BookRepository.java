@@ -16,7 +16,6 @@ import java.util.Set;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    Optional<Book> findByTitle(String title);
     boolean existsByTitle(String title);
     List<Book> findByAuthor_FullName(String fullName);
     @Query("SELECT b FROM Book b WHERE LOWER(b.title) LIKE LOWER(CONCAT('%', :title, '%'))")

@@ -23,9 +23,6 @@ public interface LibraryRepository extends JpaRepository<Library, Long> {
 
     List<Library> findByUser(User user);
 
-    boolean existsByUserAndNameIgnoreCase(User user, String name);
-
-
     boolean existsByUserIdAndNameIgnoreCase(Integer id, String trim);
 
     @Query("""
