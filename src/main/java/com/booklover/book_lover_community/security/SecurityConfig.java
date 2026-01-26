@@ -31,14 +31,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // publiczne
                         .requestMatchers(
+                                "/",             // strona główna dostępna dla wszystkich
+                                "/home",         // strona home dostępna dla wszystkich
                                 "/login",
                                 "/register",
                                 "/auth/register",
                                 "/css/**",
                                 "/js/**",
-                                "/h2-console/**",
-                                "/admin",
-                                "/admin/authors/add"
+                                "/images/**",
+                                "/h2-console/**"
                         ).permitAll()
 
                         // tylko ADMIN

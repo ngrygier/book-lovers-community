@@ -1,22 +1,20 @@
 spring:
   datasource:
-    url: jdbc:h2:file:./data/testdb   # baza w pliku, zachowuje dane między restartami
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
     password: dupa
   jpa:
     hibernate:
-      ddl-auto: update    # update zachowa istniejące tabele i doda nowe
+      ddl-auto: create-drop   # każdorazowo tworzy schemat od nowa
     show-sql: true
-
   h2:
     console:
       enabled: true
       path: /h2-console
       settings:
         web-allow-others: true
-#michalinka pozdrawia <3
 server:
   servlet:
-    context-path: /   # wszystkie endpointy pod /
-  port: 8081         # możesz zmienić port jeśli chcesz
+    context-path: /
+  port: 8081

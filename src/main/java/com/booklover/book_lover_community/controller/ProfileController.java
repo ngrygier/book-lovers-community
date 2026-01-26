@@ -7,11 +7,15 @@ import com.booklover.book_lover_community.repository.UserRepository;
 import com.booklover.book_lover_community.service.UserService;
 import com.booklover.book_lover_community.user.User;
 import com.booklover.book_lover_community.repository.LibraryRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.Year;
 import java.util.Arrays;
@@ -23,19 +27,20 @@ public class ProfileController {
     private final UserService userService;
     private final LibraryRepository libraryRepository;
     private final ReviewRepository reviewRepository;
+    private final UserRepository userRepository;
 
     public ProfileController(UserService userService,
                              LibraryRepository libraryRepository,
-                             ReviewRepository reviewRepository) {
+                             ReviewRepository reviewRepository, UserRepository userRepository) {
         this.userService = userService;
         this.libraryRepository = libraryRepository;
         this.reviewRepository = reviewRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/profile")
     public String profile(Model model) {
 
-        // ✅ aktualnie zalogowany użytkownik
         User user = userService.getCurrentUser();
 
         // DTO do edycji profilu
@@ -53,7 +58,7 @@ public class ProfileController {
                         .contains(lib.getName()))
                 .toList();
 
-        // 🔥 LICZENIE PRZECZYTANYCH KSIĄŻEK W ROKU
+        //  LICZENIE PRZECZYTANYCH KSIĄŻEK W ROKU
         int year = Year.now().getValue();
 
         long booksRead = reviewRepository
@@ -71,11 +76,24 @@ public class ProfileController {
     }
 
     @PostMapping("/profile/edit")
-    public String editProfile(@ModelAttribute("editProfile") EditProfileDto dto)
-            throws Exception {
-        userService.updateProfile(dto);
+    @Transactional
+    public String editProfile(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam String username,
+            @RequestParam String email
+    ) {
+
+        User user = userRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow();
+
+        user.setUsername(username);
+        user.setEmail(email);
+
+        userRepository.save(user);
+
         return "redirect:/profile";
     }
+
 
     @PostMapping("/profile/libraries/add")
     public String addLibrary(@ModelAttribute("name") String name) {
