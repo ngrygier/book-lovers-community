@@ -3,7 +3,6 @@ package com.booklover.book_lover_community.repository;
 import com.booklover.book_lover_community.model.Author;
 import com.booklover.book_lover_community.model.Book;
 import com.booklover.book_lover_community.model.Review;
-import com.booklover.book_lover_community.user.ShelfStatus;
 import com.booklover.book_lover_community.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

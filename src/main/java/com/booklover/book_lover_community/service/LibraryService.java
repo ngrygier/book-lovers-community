@@ -33,7 +33,6 @@ public class LibraryService {
     @Transactional
     public void addBookToLibrary(Library library, Book book) {
         library.getBooks().add(book);
-        book.setLibrary(library);
         libraryRepository.save(library);
     }
 
@@ -56,7 +55,6 @@ public class LibraryService {
 
         // Dodanie książki do biblioteki
         library.getBooks().add(book);
-        book.setLibrary(library); // jeśli w encji Book masz @ManyToOne do Library
 
         libraryRepository.save(library); // zapis relacji
     }
@@ -77,14 +75,24 @@ public class LibraryService {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Książka nie istnieje w tej bibliotece"));
 
-        // Usunięcie książki z listy
         library.getBooks().remove(bookToRemove);
 
-        // Jeśli w encji Book masz @ManyToOne do Library, możesz ustawić null
-        bookToRemove.setLibrary(null);
-
-        // Zapisanie zmian
         libraryRepository.save(library);
+    }
+    @Transactional
+    public void deleteLibrary(Long libraryId) {
+        Library library = libraryRepository.findById(libraryId)
+                .orElseThrow(() -> new IllegalArgumentException("Library not found"));
+
+
+        // Usuń powiązania z książkami w tabeli łączącej
+        for (Book book : library.getBooks()) {
+            book.getLibraries().remove(library); // odłącz bibliotekę od książki
+        }
+        library.getBooks().clear(); // usuń wszystkie książki z biblioteki
+
+
+        libraryRepository.delete(library);
     }
 
 

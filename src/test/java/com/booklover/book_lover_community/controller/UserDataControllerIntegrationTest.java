@@ -61,7 +61,6 @@ class UserDataControllerIntegrationTest {
 
         Author author = new Author();
         author.setFullName("George Orwell");
-        author.setId(1L);
         author = authorRepository.save(author);
         author = authorRepository.findById(author.getId()).orElseThrow();
 

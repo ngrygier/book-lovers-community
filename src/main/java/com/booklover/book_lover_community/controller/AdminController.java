@@ -2,16 +2,23 @@ package com.booklover.book_lover_community.controller;
 
 import com.booklover.book_lover_community.model.Author;
 import com.booklover.book_lover_community.model.Book;
+import com.booklover.book_lover_community.model.Library;
+import com.booklover.book_lover_community.repository.BookRepository;
 import com.booklover.book_lover_community.repository.ReviewRepository;
 import com.booklover.book_lover_community.repository.UserRepository;
 import com.booklover.book_lover_community.service.AuthorService;
 import com.booklover.book_lover_community.service.BookService;
+import com.booklover.book_lover_community.service.LibraryService;
 import com.booklover.book_lover_community.user.User;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,6 +30,8 @@ public class AdminController {
     private final AuthorService authorService;
     private final UserRepository userRepository;
     private final ReviewRepository reviewRepository;
+    private final LibraryService libraryService;
+    private final BookRepository bookRepository;
 
     /* =========================
        PANEL ADMINA
@@ -57,8 +66,19 @@ public class AdminController {
     }
 
     @PostMapping("/books/delete/{id}")
+    @Transactional
     public String deleteBook(@PathVariable Long id) {
-        bookService.deleteById(id);
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found"));
+
+        // Usuń książkę ze wszystkich bibliotek
+        for (Library library : book.getLibraries()) {
+            library.getBooks().remove(book);
+        }
+
+        // Usuń książkę (Hibernate usunie też recenzje i userBooks dzięki cascade)
+        bookService.deleteBook(book.getId());
+
         return "redirect:/admin/books/index";
     }
 
@@ -109,10 +129,18 @@ public class AdminController {
         model.addAttribute("reviews", reviewRepository.findByUserId(id));
         return "admin/user-details";
     }
-
     @PostMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
-        userRepository.deleteById(Math.toIntExact(id));
+        User user = userRepository.findById(Math.toIntExact(id))
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        userRepository.delete(user);
+        return "redirect:/admin/users";
+    }
+
+    @PostMapping("/libraries/delete/{id}")
+    public String deleteLibrary(@PathVariable Long id) {
+        libraryService.deleteLibrary(id);
         return "redirect:/admin/users";
     }
 

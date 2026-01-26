@@ -50,7 +50,7 @@ public class AuthenticationController {
             userService.registerUser(request);
 
             // Po udanej rejestracji przekierowujemy użytkownika
-            return "redirect:/home";
+            return "redirect:/login";
         } catch (IllegalArgumentException e) {
             // Jeśli serwis zgłosi wyjątek (np. username zajęty), dodajemy komunikat do modelu
             model.addAttribute("errorMessage", e.getMessage());

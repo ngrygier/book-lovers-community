@@ -41,9 +41,8 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Review> reviews = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "library_id") // opcjonalnie, jeśli chcesz określić nazwę kolumny
-    private Library library;
+    @ManyToMany(mappedBy = "books")
+    private Set<Library> libraries = new HashSet<>();
 
 
 }
