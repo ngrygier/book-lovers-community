@@ -50,19 +50,5 @@ public class UserBookService {
         return userBookRepository.save(userBook);
     }
 
-    @Transactional
-    public void changeShelfStatus(Long userBookId, ShelfStatus newStatus) {
-
-        UserBook userBook = userBookRepository.findById(userBookId)
-                .orElseThrow(() ->
-                        new EntityNotFoundException("UserBook not found"));
-
-        userBook.setStatus(newStatus);
-    }
-
-    @Transactional
-    public void removeBookFromShelf(Long userBookId) {
-        userBookRepository.deleteById(userBookId);
-    }
-}
+ }
 

@@ -46,14 +46,13 @@ public class BookController {
         }
     }
 
-    // ========================
+
     // Wyświetlanie książek
-    // ========================
     @GetMapping
     public String listBooks(Model model) {
         List<Book> books = bookService.getAllBooks();
         model.addAttribute("books", books);
-        return "books"; // szablon books.html
+        return "books";
     }
 
     @GetMapping("/{id}")
@@ -72,7 +71,7 @@ public class BookController {
                         .toList() :
                 List.of();
 
-        // Biblioteki niestandardowe (inne niż TO_READ, READING, READ)
+        // Biblioteki wlasne uzytkownika
         List<Library> customLibraries = libraries != null ?
                 libraries.stream()
                         .filter(lib -> !List.of("TO_READ", "READING", "READ").contains(lib.getName().toUpperCase()))
@@ -94,9 +93,7 @@ public class BookController {
     }
 
 
-    // ========================
     // Dodawanie książki do biblioteki
-    // ========================
     @PostMapping("/{id}/add-to-library")
     public String addToLibrary(@PathVariable Long id,
                                @RequestParam Long libraryId) {
@@ -105,9 +102,7 @@ public class BookController {
         return "redirect:/books/" + id;
     }
 
-    // ========================
     // Dodawanie recenzji (z DTO)
-    // ========================
     @PostMapping("/{id}/add-review")
     @Transactional
     public String addReview(@PathVariable Long id,

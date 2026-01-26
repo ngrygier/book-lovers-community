@@ -33,18 +33,14 @@ public class AdminController {
     private final LibraryService libraryService;
     private final BookRepository bookRepository;
 
-    /* =========================
-       PANEL ADMINA
-     ========================= */
+   //   PANEL ADMINA
 
     @GetMapping
     public String admin() {
         return "admin";
     }
 
-    /* =========================
-       KSIĄŻKI
-     ========================= */
+    //  KSIAZKI
 
     @GetMapping("/books/add")
     public String showAddBookForm(Model model) {
@@ -72,9 +68,7 @@ public class AdminController {
     }
 
 
-    /* =========================
-       AUTORZY
-     ========================= */
+    //  AUTORZY
 
     @GetMapping("/authors/add")
     public String showAddAuthorForm(Model model) {
@@ -100,9 +94,7 @@ public class AdminController {
         return "redirect:/admin/authors";
     }
 
-    /* =========================
-       UŻYTKOWNICY
-     ========================= */
+    //  UZYTKOWNICY
 
     @GetMapping("/users")
     public String users(Model model) {
@@ -136,9 +128,7 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
-    /* =========================
-       RECENZJE
-     ========================= */
+    //  RECENZJE
 
     @PostMapping("/reviews/delete/{reviewId}")
     public String deleteReview(

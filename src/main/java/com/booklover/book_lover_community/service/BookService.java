@@ -30,10 +30,6 @@ public class BookService {
         this.libraryRepository = libraryRepository;
     }
 
-    // ========================
-    // PODSTAWOWE METODY CRUD
-    // ========================
-
     // Tworzenie książki (sprawdza czy już istnieje)
     @Transactional
     public Book createBook(Book book) {
@@ -69,23 +65,14 @@ public class BookService {
     public void deleteBookCompletely(Long bookId) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new EntityNotFoundException("Book not found"));
-
-        // 1️⃣ Pobierz wszystkie biblioteki, które zawierają tę książkę
         List<Library> libraries = libraryRepository.findAllByBooksContains(book);
-
-        // 2️⃣ Usuń książkę z każdej biblioteki
         for (Library library : libraries) {
             library.getBooks().remove(book);
         }
-
-        // 3️⃣ Zapisz biblioteki / flush
         libraryRepository.saveAll(libraries);
-        libraryRepository.flush(); // wymusza DELETE z join table
-
-        // 4️⃣ Usuń książkę
+        libraryRepository.flush();
         bookRepository.delete(book);
     }
-
 
     // Zapis lub aktualizacja książki
     public Book save(Book book) {
@@ -96,10 +83,6 @@ public class BookService {
     public void deleteById(Long id) {
         bookRepository.deleteById(id);
     }
-
-    // ========================
-    // METODY SPECJALNE
-    // ========================
 
     // Pobranie losowych książek (np. do rekomendacji na stronie głównej)
     @Transactional
@@ -118,13 +101,11 @@ public class BookService {
         if (query == null || query.isBlank()) {
             return getRandomBooks(5); // domyślnie losowe książki
         }
-
         if ("title".equalsIgnoreCase(type)) {
             return bookRepository.findByTitleContainingIgnoreCase(query);
         } else if ("author".equalsIgnoreCase(type)) {
             return bookRepository.findByAuthorFullNameContainingIgnoreCase(query);
         }
-
         return getRandomBooks(5); // domyślnie losowe książki
     }
 
@@ -142,8 +123,6 @@ public class BookService {
 
     @Transactional
     public void addReview(Book book, User user, ReviewDto reviewDto) {
-
-        
         Review review = new Review();
         review.setBook(book);
         review.setUser(user);
@@ -158,7 +137,6 @@ public class BookService {
         double total = book.getReviews().stream().mapToInt(Review::getStars).sum();
         book.setRating(total / book.getReviews().size());
         book.setRatingCount(book.getReviews().size());
-
         bookRepository.save(book);
     }
 

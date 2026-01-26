@@ -4,7 +4,6 @@ import com.booklover.book_lover_community.Dto.BookStatsDto;
 import com.booklover.book_lover_community.Dto.ReviewDto;
 import com.booklover.book_lover_community.model.Book;
 import com.booklover.book_lover_community.model.Library;
-import com.booklover.book_lover_community.model.Review;
 import com.booklover.book_lover_community.service.BookService;
 import com.booklover.book_lover_community.service.BookStatsService;
 import com.booklover.book_lover_community.service.LibraryService;
@@ -67,10 +66,7 @@ class BookControllerTest {
         library.getBooks().add(book);
     }
 
-    // =======================
-    // addCsrfToken
-    // =======================
-    @Test
+
     void addCsrfToken_withToken() {
         var token = mock(org.springframework.security.web.csrf.CsrfToken.class);
         when(request.getAttribute("_csrf")).thenReturn(token);
@@ -85,9 +81,7 @@ class BookControllerTest {
         verify(model, never()).addAttribute(eq("_csrf"), any());
     }
 
-    // =======================
-    // listBooks
-    // =======================
+
     @Test
     void listBooks_success() {
         List<Book> books = List.of(book);
@@ -99,9 +93,7 @@ class BookControllerTest {
         assertEquals("books", view);
     }
 
-    // =======================
-    // viewBook
-    // =======================
+
     @Test
     void viewBook_success() {
         List<Library> libraries = List.of(library);
@@ -119,9 +111,7 @@ class BookControllerTest {
         assertEquals("book-details", view);
     }
 
-    // =======================
-    // addToLibrary
-    // =======================
+
     @Test
     void addToLibrary_success() {
         when(bookService.getBookById(100L)).thenReturn(book);
@@ -132,9 +122,6 @@ class BookControllerTest {
         verify(libraryService).addBookToLibrary(library, book);
     }
 
-    // =======================
-    // addReview
-    // =======================
     @Test
     void addReview_success() {
         ReviewDto dto = new ReviewDto();
@@ -149,9 +136,7 @@ class BookControllerTest {
         verify(bookService).addReview(book, user, dto);
     }
 
-    // =======================
-    // addToCustomLibrary
-    // =======================
+
     @Test
     void addToCustomLibrary_success() {
         when(userService.getCurrentUser()).thenReturn(user);
@@ -171,9 +156,6 @@ class BookControllerTest {
                 () -> bookController.addToCustomLibrary(100L, 10L));
     }
 
-    // =======================
-    // removeBookFromLibrary
-    // =======================
     @Test
     void removeBookFromLibrary_success() {
         when(userService.getCurrentUser()).thenReturn(user);

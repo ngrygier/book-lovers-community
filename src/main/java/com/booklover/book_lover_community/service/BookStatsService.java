@@ -27,8 +27,6 @@ public class BookStatsService {
         if (avgRating == null) {
             avgRating = 0.0; // <- domyślna wartość jeśli brak ocen
         }
-
-
         Map<Integer, Long> distribution = new HashMap<>();
         for (Object[] row : reviewRepository.getRatingDistribution(bookId)) {
             distribution.put((Integer) row[0], (Long) row[1]);

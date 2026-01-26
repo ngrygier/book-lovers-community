@@ -46,7 +46,7 @@ class LibraryServiceTest {
         book.setId(100L);
     }
 
-    // -------------------- GET LIBRARY BY ID --------------------
+
     @Test
     void getLibraryById_success() {
         when(libraryRepository.findById(10L)).thenReturn(Optional.of(library));
@@ -59,7 +59,7 @@ class LibraryServiceTest {
         assertThrows(IllegalArgumentException.class, () -> libraryService.getLibraryById(20L));
     }
 
-    // -------------------- GET LIBRARIES BY USER --------------------
+
     @Test
     void getLibrariesByUser_success() {
         List<Library> libs = List.of(library);
@@ -67,7 +67,7 @@ class LibraryServiceTest {
         assertEquals(libs, libraryService.getLibrariesByUser(user));
     }
 
-    // -------------------- ADD BOOK TO LIBRARY --------------------
+
     @Test
     void addBookToLibrary_success() {
         when(libraryRepository.save(any(Library.class))).thenReturn(library);
@@ -75,7 +75,7 @@ class LibraryServiceTest {
         assertTrue(library.getBooks().contains(book));
     }
 
-    // -------------------- GET LIBRARY BY USER AND NAME --------------------
+
     @Test
     void getLibraryByUserAndName_success() {
         when(libraryRepository.findByUserAndName(user, "MyLib")).thenReturn(Optional.of(library));
@@ -89,7 +89,7 @@ class LibraryServiceTest {
                 () -> libraryService.getLibraryByUserAndName(user, "Unknown"));
     }
 
-    // -------------------- ADD BOOK TO CUSTOM LIBRARY --------------------
+
     @Test
     void addBookToCustomLibrary_success() {
         when(libraryRepository.findById(10L)).thenReturn(Optional.of(library));

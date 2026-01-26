@@ -45,9 +45,9 @@ class AdminControllerIntegrationTest {
         authorRepository.saveAndFlush(author);
     }
 
-    /* =========================
-       PANEL ADMINA
-     ========================= */
+
+
+
 
     @Test
     @WithMockUser(roles = "ADMIN")
@@ -57,9 +57,7 @@ class AdminControllerIntegrationTest {
                 .andExpect(view().name("admin"));
     }
 
-    /* =========================
-       KSIĄŻKI
-     ========================= */
+
 
     @Test
     @WithMockUser(roles = "ADMIN")
@@ -126,9 +124,6 @@ class AdminControllerIntegrationTest {
         assertThat(bookRepository.count()).isEqualTo(before - 1);
     }
 
-    /* =========================
-       AUTORZY
-     ========================= */
 
     @Test
     @WithMockUser(roles = "ADMIN")
@@ -158,9 +153,6 @@ class AdminControllerIntegrationTest {
                 .andExpect(model().attributeExists("authors"));
     }
 
-    /* =========================
-       BEZPIECZEŃSTWO
-     ========================= */
 
     @Test
     void shouldDenyAccessForUnauthenticatedUser() throws Exception {

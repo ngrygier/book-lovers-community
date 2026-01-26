@@ -35,7 +35,7 @@ public class UserBook {
     @Column(nullable = false)
     private ShelfStatus status; // TO_READ, READING, READ
 
-    private Integer rating; // ocena od 1 do 10
+    private Integer rating; // ocena od 1 do 5
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

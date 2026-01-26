@@ -16,22 +16,12 @@ public class HomeController {
 
     private final BookService bookService;
 
-    // Konstruktor wstrzykujący BookService
+    // Konstruktor do wstrzyknięcia BookService
     public HomeController(BookService bookService) {
         this.bookService = bookService;
     }
 
-    /**
-     * Obsługa strony głównej /home
-     * - Jeśli zalogowany użytkownik ma rolę ADMIN → przekierowanie na /admin
-     * - Pobranie książek do wyświetlenia: losowe lub wyszukiwanie po tytule/autorze
-     *
-     * @param authentication obiekt logowania użytkownika
-     * @param model          model Thymeleaf do przekazania danych
-     * @param query          fraza wyszukiwania (opcjonalna)
-     * @param type           typ wyszukiwania: title / author (domyślnie title)
-     * @return widok home.html
-     */
+    // Obsługa strony głównej aplikacji
     @GetMapping("/home")
     public String homeRedirect(
             Authentication authentication,
@@ -40,7 +30,8 @@ public class HomeController {
             @RequestParam(required = false, defaultValue = "title") String type
     ) {
 
-        // Jeśli użytkownik jest adminem → przekierowanie na stronę admina
+        // Sprawdzenie czy użytkownik jest zalogowany jako ADMIN
+        // jeśli tak, to przekierowanie do panelu admina
         if (authentication != null) {
             for (GrantedAuthority authority : authentication.getAuthorities()) {
                 if ("ROLE_ADMIN".equals(authority.getAuthority())) {
@@ -49,14 +40,17 @@ public class HomeController {
             }
         }
 
-        // Pobranie książek: losowe lub wyszukane
+        // Pobranie listy książek:
+        // jeśli nie ma wyszukiwania → losowe
+        // jeśli jest → według tytułu lub autora
         List<Book> books = bookService.searchBooks(query, type);
 
-        // Dodanie danych do modelu
+        // Przekazanie danych do widoku
         model.addAttribute("books", books);
         model.addAttribute("query", query);
         model.addAttribute("type", type);
 
-        return "home"; // widok Thymeleaf
+        // Zwrócenie widoku home.html
+        return "home";
     }
 }

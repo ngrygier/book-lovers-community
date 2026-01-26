@@ -68,9 +68,7 @@ class HomeControllerIntegrationTest {
                 .andExpect(redirectedUrl("/admin"));
     }
 
-    // =========================
-    // 2️⃣ USER → home view
-    // =========================
+
     @Test
     @WithMockUser(roles = "USER")
     void home_user_shouldReturnHomeView() throws Exception {

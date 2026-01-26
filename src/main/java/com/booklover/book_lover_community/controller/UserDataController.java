@@ -33,7 +33,7 @@ public class UserDataController {
         this.reviewService = reviewService;
     }
 
-    // ================= EXPORT JSON =================
+    // XPORT JSON
     @GetMapping("/export/json/{userId}")
     public ResponseEntity<?> exportUserDataJson(@PathVariable Long userId) {
         User user = userService.getUserById(userId);
@@ -48,7 +48,7 @@ public class UserDataController {
         return ResponseEntity.ok(data);
     }
 
-    // ================= EXPORT CSV =================
+    // EXPORT CSV
     @GetMapping("/export/csv/{userId}")
     public void exportUserDataCsv(@PathVariable Long userId, HttpServletResponse response) throws IOException {
         User user = userService.getUserById(userId);
@@ -79,7 +79,7 @@ public class UserDataController {
         }
     }
 
-    // ================= IMPORT JSON =================
+    //  IMPORT JSON
     @PostMapping("/import/json/{userId}")
     public ResponseEntity<?> importUserDataJson(@PathVariable Long userId, @RequestParam("file") MultipartFile file) throws IOException {
         User user = userService.getUserById(userId);

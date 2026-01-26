@@ -2,7 +2,7 @@ package com.booklover.book_lover_community.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-// Fake encoder – po prostu dodaje prefix ENC()
+
 public class FakePasswordEncoder implements PasswordEncoder {
 
     @Override

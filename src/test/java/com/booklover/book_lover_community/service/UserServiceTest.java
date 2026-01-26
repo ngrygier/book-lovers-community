@@ -46,7 +46,7 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        // Użytkownik testowy
+
         user = User.builder()
                 .id(1)
                 .username("testuser")
@@ -121,7 +121,7 @@ class UserServiceTest {
                 () -> userService.registerUser(registerDto));
     }
 
-    // -------------------- DEFAULT SHELVES --------------------
+
 
     @Test
     void createDefaultShelves_createsAll() {
@@ -141,7 +141,7 @@ class UserServiceTest {
         assertEquals(ShelfStatus.values().length, libs.size());
     }
 
-    // -------------------- CUSTOM LIBRARY --------------------
+
 
     @Test
     void createCustomLibrary_success() {
@@ -160,7 +160,7 @@ class UserServiceTest {
                 () -> userService.createCustomLibrary("Custom", user));
     }
 
-    // -------------------- CURRENT USER --------------------
+
 
     @Test
     void getCurrentUser_returnsUser() {
@@ -168,7 +168,7 @@ class UserServiceTest {
         assertEquals("testuser", result.getUsername());
     }
 
-    // -------------------- UPDATE PROFILE --------------------
+
 
     @Test
     void updateProfile_updatesUsernameAndImage() throws IOException {
@@ -179,7 +179,7 @@ class UserServiceTest {
         assertEquals("updatedUser", user.getUsername());
     }
 
-    // -------------------- LOAD BY USERNAME --------------------
+
 
     @Test
     void loadUserByUsername_success() {
@@ -193,7 +193,7 @@ class UserServiceTest {
         assertThrows(Exception.class, () -> userService.loadUserByUsername("unknown"));
     }
 
-    // -------------------- GET USER BY ID --------------------
+
 
     @Test
     void getUserById_success() {

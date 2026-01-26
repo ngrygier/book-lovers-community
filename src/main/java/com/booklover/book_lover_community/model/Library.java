@@ -20,7 +20,7 @@ public class Library {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name; // np. "Fantastyka", "Historia" itd.
+    private String name; // wlasne biblioteki
 
     @ManyToOne
     private User user;
