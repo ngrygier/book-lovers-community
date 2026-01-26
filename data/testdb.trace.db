@@ -1089,3 +1089,574 @@ Caused by: java.lang.AssertionError
 	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
 	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
 	... 19 more
+2026-01-26 18:23:46.940403+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:23:46.946141+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:23:46.948647+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:23:50.640053+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:23:50.642055+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:23:50.644083+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:23:57.106760+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:27:37.424140+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:28:13.817895+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:31:42.243642+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:32:13.097457+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:32:13.103892+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:32:13.105798+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:32:16.869359+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:32:16.871596+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:32:16.872758+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:32:22.419570+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:34:58.550781+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:35:30.654454+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:35:30.660703+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:35:30.661990+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:35:34.350172+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:35:34.352400+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:35:34.355413+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:35:39.450781+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:52:51.330068+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:57:45.622232+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:58:54.678073+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:58:54.694170+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:58:54.697421+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:59:05.600249+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:59:05.604413+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:59:05.610561+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:59:19.722289+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 19:13:35.011660+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 19:13:35.023552+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 19:13:35.025872+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 19:13:42.631118+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 19:13:42.634221+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 19:13:42.637222+01:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 19:13:53.139460+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more

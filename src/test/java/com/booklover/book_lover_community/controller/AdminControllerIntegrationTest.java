@@ -4,6 +4,7 @@ import com.booklover.book_lover_community.model.Author;
 import com.booklover.book_lover_community.model.Book;
 import com.booklover.book_lover_community.repository.AuthorRepository;
 import com.booklover.book_lover_community.repository.BookRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -21,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AdminControllerIntegrationTest {
 
@@ -33,53 +36,74 @@ class AdminControllerIntegrationTest {
     @Autowired
     private AuthorRepository authorRepository;
 
-    private Author testAuthor;
+    private Author author;
 
     @BeforeEach
-    void setup() {
-
-        bookRepository.deleteAll();
-        authorRepository.deleteAll();
-
-        testAuthor = new Author();
-        testAuthor.setFullName("Test Author");
-        authorRepository.save(testAuthor);
+    void setUp() {
+        author = new Author();
+        author.setFullName("Test Author");
+        authorRepository.saveAndFlush(author);
     }
 
+    /* =========================
+       PANEL ADMINA
+     ========================= */
+
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
-    void testAdminPageAccessible() throws Exception {
+    @WithMockUser(roles = "ADMIN")
+    void shouldRenderAdminPanel() throws Exception {
         mockMvc.perform(get("/admin"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("admin"));
     }
 
-    @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
-    void testAddBook() throws Exception {
-        mockMvc.perform(post("/admin/books/add")
-                        .param("title", "Integration Test Book")
-                        .param("author.id", testAuthor.getId().toString())
-                        .with(csrf()) // CSRF konieczne przy POST
-                )
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin/books/index"));
+    /* =========================
+       KSIĄŻKI
+     ========================= */
 
-        // Weryfikacja w bazie
-        assertEquals(1, bookRepository.count());
-        Book savedBook = bookRepository.findAll().get(0);
-        assertEquals("Integration Test Book", savedBook.getTitle());
-        assertEquals(testAuthor.getId(), savedBook.getAuthor().getId());
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void shouldShowAddBookForm() throws Exception {
+        mockMvc.perform(get("/admin/books/add"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("admin/books/add"));
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
-    void testBooksList() throws Exception {
-        Book book = new Book();
-        book.setTitle("Existing Book");
-        book.setAuthor(testAuthor);
-        bookRepository.save(book);
+    @WithMockUser(roles = "ADMIN")
+    void shouldPopulateAddBookFormModel() throws Exception {
+        mockMvc.perform(get("/admin/books/add"))
+                .andExpect(model().attributeExists("book"))
+                .andExpect(model().attributeExists("authors"));
+    }
 
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void shouldRedirectAfterAddingBook() throws Exception {
+        mockMvc.perform(post("/admin/books/add")
+                        .param("title", "New Book")
+                        .param("author.id", author.getId().toString())
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin/books/index"));
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void shouldPersistBookInDatabase() throws Exception {
+        long before = bookRepository.count();
+
+        mockMvc.perform(post("/admin/books/add")
+                .param("title", "Persisted Book")
+                .param("author.id", author.getId().toString())
+                .with(csrf()));
+
+        assertThat(bookRepository.count()).isEqualTo(before + 1);
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void shouldShowBooksList() throws Exception {
         mockMvc.perform(get("/admin/books/index"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("admin/books/index"))
@@ -87,31 +111,60 @@ class AdminControllerIntegrationTest {
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
-    void testDeleteBook() throws Exception {
+    @WithMockUser(roles = "ADMIN")
+    void shouldDeleteBook() throws Exception {
         Book book = new Book();
-        book.setTitle("Book to Delete");
-        book.setAuthor(testAuthor);
-        bookRepository.save(book);
+        book.setTitle("To Delete");
+        book.setAuthor(author);
+        bookRepository.saveAndFlush(book);
 
-        Long bookId = bookRepository.findAll().get(0).getId();
+        long before = bookRepository.count();
 
-        mockMvc.perform(post("/admin/books/delete/" + bookId)
-                        .with(csrf())
-                )
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/admin/books/index"));
+        mockMvc.perform(post("/admin/books/delete/{id}", book.getId())
+                .with(csrf()));
 
-        assertEquals(0, bookRepository.count());
+        assertThat(bookRepository.count()).isEqualTo(before - 1);
+    }
+
+    /* =========================
+       AUTORZY
+     ========================= */
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void shouldShowAddAuthorForm() throws Exception {
+        mockMvc.perform(get("/admin/authors/add"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("admin/authors/add"))
+                .andExpect(model().attributeExists("author"));
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
-    void testShowAddBookForm() throws Exception {
-        mockMvc.perform(get("/admin/books/add"))
+    @WithMockUser(roles = "ADMIN")
+    void shouldRedirectAfterAddingAuthor() throws Exception {
+        mockMvc.perform(post("/admin/authors/add")
+                        .param("fullName", "New Author")
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin/authors"));
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void shouldShowAuthorsList() throws Exception {
+        mockMvc.perform(get("/admin/authors"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("admin/books/add"))
-                .andExpect(model().attributeExists("book"))
+                .andExpect(view().name("admin/authors/index"))
                 .andExpect(model().attributeExists("authors"));
+    }
+
+    /* =========================
+       BEZPIECZEŃSTWO
+     ========================= */
+
+    @Test
+    void shouldDenyAccessForUnauthenticatedUser() throws Exception {
+        mockMvc.perform(get("/admin"))
+                .andExpect(status().is3xxRedirection());
     }
 }

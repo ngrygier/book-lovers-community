@@ -35,7 +35,6 @@ class UserControllerTest {
                 .firstname("jadzia")
                 .lastname("makowka")
                 .createdDate(null)
-                .id(1)
                 .username("testuser")
                 .email("test@test.pl")
                 .password("password")
