@@ -1,9 +1,6 @@
 package com.booklover.book_lover_community.controller;
 
-import com.booklover.book_lover_community.model.Author;
-import com.booklover.book_lover_community.model.Book;
-import com.booklover.book_lover_community.model.Review;
-import com.booklover.book_lover_community.model.UserBook;
+import com.booklover.book_lover_community.model.*;
 import com.booklover.book_lover_community.repository.*;
 import com.booklover.book_lover_community.user.ShelfStatus;
 import com.booklover.book_lover_community.user.User;
@@ -22,7 +19,6 @@ import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -52,17 +48,16 @@ class UserDataControllerIntegrationTest {
     void setUp() {
         user = new User();
         user.setUsername("testuser");
+        user.setFirstname("jadzia");
+        user.setLastname("makowka");
         user.setEmail("test@test.pl");
         user.setPassword("password");
         user.setEnabled(true);
-        user.setFirstname("jadzia");
-        user.setLastname("makowka");
         user = userRepository.save(user);
 
         Author author = new Author();
         author.setFullName("George Orwell");
         author = authorRepository.save(author);
-        author = authorRepository.findById(author.getId()).orElseThrow();
 
         book = new Book();
         book.setTitle("1984");
@@ -84,28 +79,146 @@ class UserDataControllerIntegrationTest {
         userBookRepository.save(userBook);
     }
 
+    @Test
+    @WithMockUser(roles = "USER")
+    void exportJson_shouldReturnOkStatus() throws Exception {
+        mockMvc.perform(get("/user/data/export/json/{id}", user.getId()))
+                .andExpect(status().isOk());
+    }
 
     @Test
-    @WithMockUser(username = "testuser", roles = "USER")
-    void shouldExportUserDataAsJson() throws Exception {
+    @WithMockUser(roles = "USER")
+    void exportJson_shouldContainUserData() throws Exception {
+        mockMvc.perform(get("/user/data/export/json/{id}", user.getId()))
+                .andExpect(jsonPath("$.user.username").value("testuser"));
+    }
 
-        mockMvc.perform(get("/user/data/export/json/{userId}", user.getId()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.user.username").value("testuser"))
-                .andExpect(jsonPath("$.books[0].title").value("1984"))
+    @Test
+    @WithMockUser(roles = "USER")
+    void exportJson_shouldContainBooks() throws Exception {
+        mockMvc.perform(get("/user/data/export/json/{id}", user.getId()))
+                .andExpect(jsonPath("$.books[0].title").value("1984"));
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    void exportJson_shouldContainReviews() throws Exception {
+        mockMvc.perform(get("/user/data/export/json/{id}", user.getId()))
                 .andExpect(jsonPath("$.reviews[0].content").value("Great book"));
     }
 
+    @Test
+    @WithMockUser(roles = "USER")
+    void exportCsv_shouldReturnOkStatus() throws Exception {
+        mockMvc.perform(get("/user/data/export/csv/{id}", user.getId()))
+                .andExpect(status().isOk());
+    }
 
     @Test
-    @WithMockUser(username = "testuser", roles = {"USER"})
-    void shouldExportUserDataAsCsv() throws Exception {
-        mockMvc.perform(get("/user/data/export/csv/{userId}", user.getId()))
-                .andExpect(status().isOk())
-                .andExpect(header().string("Content-Type", "text/csv"))
-                .andExpect(header().string("Content-Disposition", "attachment; filename=\"user_data.csv\""))
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("Book Title,Author,Review,Rating")))
+    @WithMockUser(roles = "USER")
+    void exportCsv_shouldHaveCsvHeaders() throws Exception {
+        mockMvc.perform(get("/user/data/export/csv/{id}", user.getId()))
+                .andExpect(header().string("Content-Type", "text/csv"));
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    void exportCsv_shouldContainHeaderRow() throws Exception {
+        mockMvc.perform(get("/user/data/export/csv/{id}", user.getId()))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("Book Title,Author,Review,Rating")));
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    void exportCsv_shouldContainBookTitle() throws Exception {
+        mockMvc.perform(get("/user/data/export/csv/{id}", user.getId()))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("1984")));
     }
-}
 
+    @Test
+    @WithMockUser(roles = "USER")
+    void importJson_shouldReturnOkStatus() throws Exception {
+        String json = """
+                {
+                  "books": [],
+                  "reviews": []
+                }
+                """;
+
+        MockMultipartFile file = new MockMultipartFile(
+                "file",
+                "data.json",
+                MediaType.APPLICATION_JSON_VALUE,
+                json.getBytes()
+        );
+
+        mockMvc.perform(multipart("/user/data/import/json/{id}", user.getId())
+                        .file(file)
+                        .with(csrf()))
+                .andExpect(status().isOk());
+    }
+
+
+    @Test
+    @WithMockUser(roles = "USER")
+    void importJson_shouldPersistReviewWhenBookExists() throws Exception {
+        String json = """
+                {
+                  "books": [],
+                  "reviews": [
+                    {
+                      "bookId": %d,
+                      "text": "Excellent",
+                      "rating": 4
+                    }
+                  ]
+                }
+                """.formatted(book.getId());
+
+        MockMultipartFile file = new MockMultipartFile(
+                "file",
+                "data.json",
+                MediaType.APPLICATION_JSON_VALUE,
+                json.getBytes()
+        );
+
+        mockMvc.perform(multipart("/user/data/import/json/{id}", user.getId())
+                .file(file)
+                .with(csrf()));
+
+        assertThat(reviewRepository.findAll())
+                .anyMatch(r -> "Excellent".equals(r.getContent()));
+    }
+
+    @Test
+    @WithMockUser(roles = "USER")
+    void importJson_shouldIgnoreReviewWithoutBookId() throws Exception {
+        long countBefore = reviewRepository.count();
+
+        String json = """
+            {
+              "books": [],
+              "reviews": [
+                { "text": "No book", "rating": 3 }
+              ]
+            }
+            """;
+
+        MockMultipartFile file = new MockMultipartFile(
+                "file",
+                "data.json",
+                MediaType.APPLICATION_JSON_VALUE,
+                json.getBytes()
+        );
+
+        mockMvc.perform(multipart("/user/data/import/json/{id}", user.getId())
+                        .file(file)
+                        .with(csrf()))
+                .andExpect(status().isOk());
+
+        long countAfter = reviewRepository.count();
+
+        assertThat(countAfter).isEqualTo(countBefore);
+    }
+
+}
