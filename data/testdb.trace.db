@@ -482,3 +482,610 @@ ON DELETE CASCADE [90045-232]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "[*]""_USER""""_USER""""_USER"""
 Syntax error in SQL statement "[*]""_USER""""_USER""""_USER"""; SQL statement:
 "_USER""_USER""_USER" [42000-232]
+2026-01-26 17:16:06.349697+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Kolumna "FULLNAME" nie istnieje
+Column "FULLNAME" not found; SQL statement:
+INSERT INTO author (fullName) VALUES
+('William Shakespeare'),
+('Jane Austen'),
+('Charles Dickens'),
+('Mark Twain'),
+('Leo Tolstoy'),
+('Fyodor Dostoevsky'),
+('Ernest Hemingway'),
+('George Orwell'),
+('Virginia Woolf'),
+('J.K. Rowling'),
+('J.R.R. Tolkien'),
+('Agatha Christie'),
+('Gabriel García Márquez'),
+('Franz Kafka'),
+('Herman Melville'),
+('Oscar Wilde'),
+('Emily Brontë'),
+('Haruki Murakami'),
+('Stephen King'),
+('Mary Shelley') [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:786)
+	at org.h2.command.Parser.parseColumn(Parser.java:1171)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1156)
+	at org.h2.command.Parser.parseInsert(Parser.java:1530)
+	at org.h2.command.Parser.parsePrepared(Parser.java:698)
+	at org.h2.command.Parser.parse(Parser.java:581)
+	at org.h2.command.Parser.parse(Parser.java:556)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp.query(WebApp.java:1118)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:235)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:229)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:117)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$4(HandlerMappingIntrospector.java:267)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2026-01-26 17:16:17.619412+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "[*]AUTHOR"; oczekiwano "ALTER, ANALYZE"
+Syntax error in SQL statement "[*]AUTHOR"; expected "ALTER, ANALYZE"; SQL statement:
+AUTHOR [42001-232]
+2026-01-26 17:16:36.613496+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO author [*]FULL_NAME) VALUES\000d\000a('William Shakespeare'),\000d\000a('Jane Austen'),\000d\000a('Charles Dickens'),\000d\000a('Mark Twain'),\000d\000a('Leo Tolstoy'),\000d\000a('Fyodor Dostoevsky'),\000d\000a('Ernest Hemingway'),\000d\000a('George Orwell'),\000d\000a('Virginia Woolf'),\000d\000a('J.K. Rowling'),\000d\000a('J.R.R. Tolkien'),\000d\000a('Agatha Christie'),\000d\000a('Gabriel García Márquez'),\000d\000a('Franz Kafka'),\000d\000a('Herman Melville'),\000d\000a('Oscar Wilde'),\000d\000a('Emily Brontë'),\000d\000a('Haruki Murakami'),\000d\000a('Stephen King'),\000d\000a('Mary Shelley')"; oczekiwano "., (, OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "INSERT INTO author [*]FULL_NAME) VALUES\000d\000a('William Shakespeare'),\000d\000a('Jane Austen'),\000d\000a('Charles Dickens'),\000d\000a('Mark Twain'),\000d\000a('Leo Tolstoy'),\000d\000a('Fyodor Dostoevsky'),\000d\000a('Ernest Hemingway'),\000d\000a('George Orwell'),\000d\000a('Virginia Woolf'),\000d\000a('J.K. Rowling'),\000d\000a('J.R.R. Tolkien'),\000d\000a('Agatha Christie'),\000d\000a('Gabriel García Márquez'),\000d\000a('Franz Kafka'),\000d\000a('Herman Melville'),\000d\000a('Oscar Wilde'),\000d\000a('Emily Brontë'),\000d\000a('Haruki Murakami'),\000d\000a('Stephen King'),\000d\000a('Mary Shelley')"; expected "., (, OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO author FULL_NAME) VALUES
+('William Shakespeare'),
+('Jane Austen'),
+('Charles Dickens'),
+('Mark Twain'),
+('Leo Tolstoy'),
+('Fyodor Dostoevsky'),
+('Ernest Hemingway'),
+('George Orwell'),
+('Virginia Woolf'),
+('J.K. Rowling'),
+('J.R.R. Tolkien'),
+('Agatha Christie'),
+('Gabriel García Márquez'),
+('Franz Kafka'),
+('Herman Melville'),
+('Oscar Wilde'),
+('Emily Brontë'),
+('Haruki Murakami'),
+('Stephen King'),
+('Mary Shelley') [42001-232]
+2026-01-26 17:19:51.590864+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO book (title, author_id, rating, rating_count, status) VALUES\000d\000a('Hamlet', 9, NULL, NULL, NULL),\000d\000a('Macbeth', 9, NULL, NULL, NULL),\000d\000a('Othello', 9, NULL, NULL, NULL),\000d\000a('King Lear', 9, NULL, NULL, NULL),\000d\000a('Romeo and Juliet', 9, NULL, NULL, NULL),\000d\000a('A Midsummer Night\\'s Dream', 9, NULL, NULL, NULL),\000d\000a('Julius Caesar', 9, NULL, NULL, NULL),\000d\000a('Twelfth Night', 9, NULL, NULL, NULL),\000d\000a('The Tempest', 9, NULL, NULL, NULL),\000d\000a('Much Ado About Nothing[*]', 9, NULL, NULL, NULL);"
+Syntax error in SQL statement "INSERT INTO book (title, author_id, rating, rating_count, status) VALUES\000d\000a('Hamlet', 9, NULL, NULL, NULL),\000d\000a('Macbeth', 9, NULL, NULL, NULL),\000d\000a('Othello', 9, NULL, NULL, NULL),\000d\000a('King Lear', 9, NULL, NULL, NULL),\000d\000a('Romeo and Juliet', 9, NULL, NULL, NULL),\000d\000a('A Midsummer Night\\'s Dream', 9, NULL, NULL, NULL),\000d\000a('Julius Caesar', 9, NULL, NULL, NULL),\000d\000a('Twelfth Night', 9, NULL, NULL, NULL),\000d\000a('The Tempest', 9, NULL, NULL, NULL),\000d\000a('Much Ado About Nothing[*]', 9, NULL, NULL, NULL);"; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES
+('Hamlet', 9, NULL, NULL, NULL),
+('Macbeth', 9, NULL, NULL, NULL),
+('Othello', 9, NULL, NULL, NULL),
+('King Lear', 9, NULL, NULL, NULL),
+('Romeo and Juliet', 9, NULL, NULL, NULL),
+('A Midsummer Night\'s Dream', 9, NULL, NULL, NULL),
+('Julius Caesar', 9, NULL, NULL, NULL),
+('Twelfth Night', 9, NULL, NULL, NULL),
+('The Tempest', 9, NULL, NULL, NULL),
+('Much Ado About Nothing', 9, NULL, NULL, NULL); [42000-232]
+2026-01-26 17:21:33.468945+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Hamlet', 9, NULL, NULL, NULL) [42102-232]
+2026-01-26 17:21:33.470226+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Macbeth', 9, NULL, NULL, NULL) [42102-232]
+2026-01-26 17:21:33.471258+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Othello', 9, NULL, NULL, NULL) [42102-232]
+2026-01-26 17:21:33.471258+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('King Lear', 9, NULL, NULL, NULL) [42102-232]
+2026-01-26 17:21:33.472258+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Romeo and Juliet', 9, NULL, NULL, NULL) [42102-232]
+2026-01-26 17:21:33.473259+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('A Midsummer Night''s Dream', 9, NULL, NULL, NULL) [42102-232]
+2026-01-26 17:21:33.473259+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Julius Caesar', 9, NULL, NULL, NULL) [42102-232]
+2026-01-26 17:21:33.474259+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Twelfth Night', 9, NULL, NULL, NULL) [42102-232]
+2026-01-26 17:21:33.474259+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('The Tempest', 9, NULL, NULL, NULL) [42102-232]
+2026-01-26 17:21:33.475259+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Much Ado About Nothing', 9, NULL, NULL, NULL) [42102-232]
+2026-01-26 17:22:36.883966+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "[*]BOOKS"; oczekiwano "BACKUP, BEGIN"
+Syntax error in SQL statement "[*]BOOKS"; expected "BACKUP, BEGIN"; SQL statement:
+BOOKS [42001-232]
+2026-01-26 17:25:21.843342+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+-- Autor 9: William Shakespeare
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Hamlet', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:25:21.844340+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Macbeth', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:25:21.844340+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Othello', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:25:21.844340+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('King Lear', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:25:21.845743+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Romeo and Juliet', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:25:21.846780+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('A Midsummer Night''s Dream', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:25:21.846780+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Julius Caesar', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:25:21.847899+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Twelfth Night', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:25:21.847899+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('The Tempest', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:25:21.848910+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Much Ado About Nothing', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:27:37.626425+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+-- Autor 9: William Shakespeare
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Hamlet', 9, 0.0, 0, NULL) [42102-232]
+2026-01-26 17:27:37.627538+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Macbeth', 9, 0.0, 0, NULL) [42102-232]
+2026-01-26 17:27:37.627538+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Othello', 9, 0.0, 0, NULL) [42102-232]
+2026-01-26 17:27:37.628550+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('King Lear', 9, 0.0, 0, NULL) [42102-232]
+2026-01-26 17:27:37.629682+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Romeo and Juliet', 9, 0.0, 0, NULL) [42102-232]
+2026-01-26 17:27:37.629682+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('A Midsummer Night''s Dream', 9, 0.0, 0, NULL) [42102-232]
+2026-01-26 17:27:37.630682+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Julius Caesar', 9, 0.0, 0, NULL) [42102-232]
+2026-01-26 17:27:37.631682+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Twelfth Night', 9, 0.0, 0, NULL) [42102-232]
+2026-01-26 17:27:37.632684+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('The Tempest', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:27:37.632684+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "BOOK" nie istnieje
+Table "BOOK" not found; SQL statement:
+INSERT INTO book (title, author_id, rating, rating_count, status) VALUES ('Much Ado About Nothing', 9, 0.0, NULL, NULL) [42102-232]
+2026-01-26 17:29:27.076257+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "[*]BOOKS"; oczekiwano "BACKUP, BEGIN"
+Syntax error in SQL statement "[*]BOOKS"; expected "BACKUP, BEGIN"; SQL statement:
+BOOKS [42001-232]
+2026-01-26 18:12:11.036325+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE__USER" już istnieje
+Table "HTE__USER" already exists; SQL statement:
+create global temporary table HTE__user(account_locked boolean, enabled boolean, id integer, rn_ integer not null, created_date timestamp(6), last_modified_date timestamp(6), email varchar(100), firstname varchar(100), lastname varchar(100), password varchar(100), username varchar(100), profile_image varchar(255), role enum ('ADMIN','USER'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:12:11.042656+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_BOOK_REVIEW" już istnieje
+Table "HTE_BOOK_REVIEW" already exists; SQL statement:
+create global temporary table HTE_book_review(rn_ integer not null, user_id integer, id bigint, review varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:12:11.043862+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "HTE_TOKEN" już istnieje
+Table "HTE_TOKEN" already exists; SQL statement:
+create global temporary table HTE_token(id integer, rn_ integer not null, user_id integer, created_at timestamp(6), expires_at timestamp(6), validated_at timestamp(6), token varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-26 18:19:15.292274+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:20:20.061497+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:21:52.775737+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:22:05.892918+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:22:17.719984+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:22:30.824039+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more
+2026-01-26 18:22:43.079699+01:00 database: close
+org.h2.message.DbException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.close(Database.java:1150)
+	at org.h2.engine.Database.removeSession(Database.java:1077)
+	at org.h2.engine.SessionLocal.close(SessionLocal.java:916)
+	at org.h2.jdbc.JdbcConnection.close(JdbcConnection.java:390)
+	at com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection(PoolBase.java:144)
+	at com.zaxxer.hikari.pool.HikariPool.lambda$closeConnection$1(HikariPool.java:462)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd wejścia/wyjścia: "Closing"
+IO Exception: "Closing" [90028-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 14 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.AssertionError [2.3.232/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:890)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 12 more
+Caused by: java.lang.AssertionError
+	at org.h2.mvstore.RandomAccessStore.moveChunkInside(RandomAccessStore.java:630)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:569)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:481)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1893)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 19 more

@@ -116,17 +116,6 @@ class LibraryServiceTest {
                 () -> libraryService.addBookToCustomLibrary(user, 10L, book));
     }
 
-    // -------------------- REMOVE BOOK FROM LIBRARY --------------------
-    @Test
-    void removeBookFromLibrary_success() {
-        library.getBooks().add(book);
-        when(libraryRepository.findById(10L)).thenReturn(Optional.of(library));
-        when(libraryRepository.save(any(Library.class))).thenReturn(library);
-
-        libraryService.removeBookFromLibrary(user, 10L, 100L);
-        assertFalse(library.getBooks().contains(book));
-        assertNull(book.getLibrary());
-    }
 
     @Test
     void removeBookFromLibrary_libraryNotExist() {

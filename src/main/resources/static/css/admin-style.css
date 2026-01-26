@@ -82,3 +82,99 @@ h2 {
 .card a:hover {
     opacity: 0.9;
 }
+/* Ogólne tło i font */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background:
+            radial-gradient(circle at top, #ede9fe, transparent 50%),
+            linear-gradient(135deg, #faf5ff, #f3e8ff);
+    color: #2e1065;
+}
+
+/* Kontener formularza */
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(109, 40, 217, 0.25);
+}
+
+/* Nagłówki */
+h2 {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-align: center;
+    color: #5b21b6;
+}
+
+/* Etykiety i inputy */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #5b21b6;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e9d5ff;
+    border-radius: 12px;
+    background: #faf5ff;
+    font-size: 14px;
+    transition: border 0.25s, box-shadow 0.25s;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 8px rgba(124, 58, 237, 0.2);
+    outline: none;
+}
+
+/* Przyciski */
+button {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+/* Link powrotu do panelu */
+p a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #7c3aed;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+p a:hover {
+    opacity: 0.8;
+}
+
+/* Responsywność formularza */
+@media (max-width: 500px) {
+    .container {
+        padding: 25px;
+        margin: 30px auto;
+    }
+}

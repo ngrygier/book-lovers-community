@@ -1,5 +1,6 @@
 package com.booklover.book_lover_community.repository;
 
+import com.booklover.book_lover_community.model.Book;
 import com.booklover.book_lover_community.model.Library;
 import com.booklover.book_lover_community.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,5 +33,8 @@ public interface LibraryRepository extends JpaRepository<Library, Long> {
     WHERE b.id = :bookId
 """)
     Long countReaders(@Param("bookId") Long bookId);
+
+    List<Library> findAllByBooksContains(Book book);
+
 
 }

@@ -1,11 +1,9 @@
 package com.booklover.book_lover_community.service;
 
 import com.booklover.book_lover_community.Dto.ReviewDto;
-import com.booklover.book_lover_community.model.Author;
-import com.booklover.book_lover_community.model.Book;
-import com.booklover.book_lover_community.model.Review;
-import com.booklover.book_lover_community.model.UserBook;
+import com.booklover.book_lover_community.model.*;
 import com.booklover.book_lover_community.repository.BookRepository;
+import com.booklover.book_lover_community.repository.LibraryRepository;
 import com.booklover.book_lover_community.repository.UserBookRepository;
 import com.booklover.book_lover_community.user.User;
 import jakarta.persistence.EntityNotFoundException;
@@ -23,11 +21,13 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final UserBookRepository userBookRepository;
+    private final LibraryRepository libraryRepository;
 
-    public BookService(BookRepository bookRepository, UserBookService userBookService, UserBookRepository userBookRepository) {
+    public BookService(BookRepository bookRepository, UserBookService userBookService, UserBookRepository userBookRepository, LibraryRepository libraryRepository) {
         this.bookRepository = bookRepository;
         this.userBookRepository = userBookRepository;
 
+        this.libraryRepository = libraryRepository;
     }
 
     // ========================
@@ -64,6 +64,28 @@ public class BookService {
         }
         bookRepository.deleteById(id);
     }
+
+    @Transactional
+    public void deleteBookCompletely(Long bookId) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("Book not found"));
+
+        // 1️⃣ Pobierz wszystkie biblioteki, które zawierają tę książkę
+        List<Library> libraries = libraryRepository.findAllByBooksContains(book);
+
+        // 2️⃣ Usuń książkę z każdej biblioteki
+        for (Library library : libraries) {
+            library.getBooks().remove(book);
+        }
+
+        // 3️⃣ Zapisz biblioteki / flush
+        libraryRepository.saveAll(libraries);
+        libraryRepository.flush(); // wymusza DELETE z join table
+
+        // 4️⃣ Usuń książkę
+        bookRepository.delete(book);
+    }
+
 
     // Zapis lub aktualizacja książki
     public Book save(Book book) {

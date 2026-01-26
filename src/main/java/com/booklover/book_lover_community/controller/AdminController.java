@@ -66,21 +66,11 @@ public class AdminController {
     }
 
     @PostMapping("/books/delete/{id}")
-    @Transactional
     public String deleteBook(@PathVariable Long id) {
-        Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found"));
-
-        // Usuń książkę ze wszystkich bibliotek
-        for (Library library : book.getLibraries()) {
-            library.getBooks().remove(book);
-        }
-
-        // Usuń książkę (Hibernate usunie też recenzje i userBooks dzięki cascade)
-        bookService.deleteBook(book.getId());
-
+        bookService.deleteBookCompletely(id);
         return "redirect:/admin/books/index";
     }
+
 
     /* =========================
        AUTORZY
@@ -129,6 +119,8 @@ public class AdminController {
         model.addAttribute("reviews", reviewRepository.findByUserId(id));
         return "admin/user-details";
     }
+
+    @Transactional
     @PostMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
         User user = userRepository.findById(Math.toIntExact(id))

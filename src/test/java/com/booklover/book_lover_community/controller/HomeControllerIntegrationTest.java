@@ -10,15 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 @Transactional
 class HomeControllerIntegrationTest {
 
@@ -31,49 +33,57 @@ class HomeControllerIntegrationTest {
     @Autowired
     private AuthorRepository authorRepository;
 
+    private Author authorRowling;
+    private Author authorTolkien;
+
     @BeforeEach
     void setUp() {
-        Author author = new Author();
-        author.setFullName("George Orwell");
-        author = authorRepository.save(author);
+
+        authorRowling = new Author();
+        authorRowling.setFullName("J.K. Rowling");
+        authorRepository.save(authorRowling);
+
+        authorTolkien = new Author();
+        authorTolkien.setFullName("J.R.R. Tolkien");
+        authorRepository.save(authorTolkien);
 
         Book book1 = new Book();
-        book1.setTitle("1984");
-        book1.setAuthor(author);
-
+        book1.setTitle("Harry Potter");
+        book1.setAuthor(authorRowling);
+        bookRepository.save(book1);
 
         Book book2 = new Book();
-        book2.setTitle("Animal Farm");
-        book2.setAuthor(author);
-
-        bookRepository.save(book1);
+        book2.setTitle("The Hobbit");
+        book2.setAuthor(authorTolkien);
         bookRepository.save(book2);
     }
 
-    @Test
-    @WithMockUser(username = "admin", roles = "ADMIN")
-    void shouldRedirectAdminToAdminPage() throws Exception {
 
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void home_adminUser_shouldRedirectToAdmin() throws Exception {
         mockMvc.perform(get("/home"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(header().string("Location", org.hamcrest.Matchers.endsWith("/admin")));
+                .andExpect(redirectedUrl("/admin"));
     }
 
+    // =========================
+    // 2️⃣ USER → home view
+    // =========================
     @Test
-    @WithMockUser(username = "user", roles = "USER")
-    void shouldReturnHomeViewForUser() throws Exception {
-
+    @WithMockUser(roles = "USER")
+    void home_user_shouldReturnHomeView() throws Exception {
         mockMvc.perform(get("/home"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
                 .andExpect(model().attributeExists("books"))
-                .andExpect(model().attribute("type", "title"));
+                .andExpect(model().attribute("books", hasSize(greaterThanOrEqualTo(1))));
     }
 
 
     @Test
-    void shouldReturnHomeViewWhenNotAuthenticated() throws Exception {
-
+    void home_anonymousUser_shouldReturnHomeView() throws Exception {
         mockMvc.perform(get("/home"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
@@ -82,43 +92,38 @@ class HomeControllerIntegrationTest {
 
 
     @Test
-    void shouldSearchBooksByTitle() throws Exception {
-
+    void home_searchByTitle_shouldReturnMatchingBook() throws Exception {
         mockMvc.perform(get("/home")
-                        .param("query", "1984")
+                        .param("query", "Harry")
                         .param("type", "title"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
-                .andExpect(model().attributeExists("books"))
-                .andExpect(model().attribute("query", "1984"))
-                .andExpect(model().attribute("type", "title"));
-
-        assertThat(bookRepository.findByTitleContainingIgnoreCase("1984")).hasSize(1);
+                .andExpect(model().attribute("books", hasSize(1)))
+                .andExpect(model().attribute("books",
+                        hasItem(hasProperty("title", is("Harry Potter")))
+                ));
     }
 
 
     @Test
-    void shouldSearchBooksByAuthor() throws Exception {
-
+    void home_searchByAuthor_shouldReturnMatchingBook() throws Exception {
         mockMvc.perform(get("/home")
-                        .param("query", "Orwell")
+                        .param("query", "Tolkien")
                         .param("type", "author"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
-                .andExpect(model().attributeExists("books"))
-                .andExpect(model().attribute("type", "author"));
-
-        assertThat(bookRepository.findByAuthorFullNameContainingIgnoreCase("Orwell")).hasSize(2);
+                .andExpect(model().attribute("books", hasSize(1)))
+                .andExpect(model().attribute("books",
+                        hasItem(hasProperty("title", is("The Hobbit")))
+                ));
     }
 
 
     @Test
-    void shouldReturnRandomBooksWhenQueryIsEmpty() throws Exception {
-
-        mockMvc.perform(get("/home")
-                        .param("query", ""))
+    void home_noQuery_shouldReturnRandomBooks() throws Exception {
+        mockMvc.perform(get("/home"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
-                .andExpect(model().attributeExists("books"));
+                .andExpect(model().attribute("books", not(empty())));
     }
 }
